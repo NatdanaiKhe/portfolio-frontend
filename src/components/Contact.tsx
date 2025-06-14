@@ -1,36 +1,8 @@
-import { getContact } from "@/services/strapi";
-import { type Contact } from "@/types";
-import { Github, Linkedin, Mail, MapPin, Unplug } from "lucide-react";
-import { useEffect, useState } from "react";
+import { type ContactType } from "@/types";
+import { Link, Mail, MapPin,  } from "lucide-react";
 
-function Contact() {
-  const [contact, setContact] = useState<Contact>();
-  const baseUrl = import.meta.env.VITE_API_ENDPOINT;
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getContact();
-        setContact(data);
-      } catch (err) {
-        setError("Failed to fetch home data");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading || !contact) {
-    return <div className="py-10 text-center">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="py-10 text-center text-red-500">{error}</div>;
-  }
-
+function Contact({ contact }: { contact: ContactType }) {
   return (
     <section
       id="contact"
@@ -71,28 +43,25 @@ function Contact() {
         {/* connect */}
         <div className="mt-4 w-full">
           <p className="mb-2 block text-sm font-bold text-gray-700">
-            <Unplug className="mr-2 inline" />
+            <Link className="mr-2 inline" />
             Connect with me
           </p>
           {contact.socials.map((social) => (
             <a
+              key={social.name}
               className="mr-4 inline-block cursor-pointer"
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
             >
               {/* TODO: add icon for each social */}
+              <img
+                className="inline h-6 w-6"
+                src={social.icon.url}
+                alt={social.name}
+              />
             </a>
           ))}
-
-          <a
-            className="inline-block cursor-pointer"
-            href="https://github.com/NatdanaiKhe"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="inline" />
-          </a>
         </div>
       </div>
     </section>

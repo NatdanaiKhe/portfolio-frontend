@@ -1,39 +1,8 @@
 import { ArrowRight, Circle } from "lucide-react";
 import { Link } from "react-scroll";
-import { useEffect, useState } from "react";
-import { getHome } from "@/services/strapi";
 import type { HomeData } from "@/types";
 
-function Home() {
-  const [homeData, setHomeData] = useState<HomeData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getHome();
-        setHomeData(data);
-      } catch (err) {
-        setError("Failed to fetch home data");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading || !homeData) {
-    return <div className="py-10 text-center">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="py-10 text-center text-red-500">{error}</div>;
-  }
-
-  const imageUrl =
-    import.meta.env.VITE_API_ENDPOINT + homeData.profile_image.url;
-
+function Home({ homeData }: { homeData: HomeData }) {
   return (
     <section
       id="home"
@@ -77,16 +46,16 @@ function Home() {
       <div className="w-ful md:2/5 flex h-1/2 items-center justify-center gap-4 md:w-1/2">
         <div className="relative w-3/4 sm:w-[300px] md:w-[500px]">
           <img
-            src={imageUrl}
+            src={homeData.profile_image.url}
             className="aspect-square rounded-full border-10 border-white object-cover shadow-lg"
             alt="Profile"
           />
-          <div className="absolute right-0 bottom-0 flex h-10 w-[200px] items-center justify-center gap-4 rounded-2xl bg-white shadow-lg">
+          <div className="absolute right-0 bottom-0 flex h-10 w-[200px] items-center justify-start gap-4 rounded-2xl bg-white px-2 shadow-lg">
             <Circle
               className={`inline ${
                 homeData.available_status
                   ? "animate-pulse text-green-500"
-                  : "text-red-500"
+                  : "animate-pulse text-red-400"
               }`}
               fill={homeData.available_status ? "green" : "red"}
             />

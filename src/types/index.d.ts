@@ -1,3 +1,11 @@
+type AppData = {
+  home: HomeData;
+  about: AboutType;
+  techStack: TechStack[];
+  projects: Project[];
+  contact: Contact;
+};
+
 export type HomeData = {
   id: number;
   documentId: string;
@@ -16,7 +24,7 @@ export type AboutType = {
   background: string;
 };
 
-export type TechStack = {
+export type TechStackType = {
   name: string;
   proficiency_level: string;
   tech_image: {
@@ -25,12 +33,12 @@ export type TechStack = {
   };
 };
 
-export type Project = {
+export type ProjectType = {
   name: string;
   description: string;
   repository: string;
   demo: string;
-  preview_images: {
+  preview_image: {
     name: string;
     url: string;
   };
@@ -42,7 +50,7 @@ export type Project = {
   ];
 };
 
-export type Contact = {
+export type ContactType = {
   email: string;
   location: string;
   socials: [
@@ -50,6 +58,10 @@ export type Contact = {
       id: number;
       name: string;
       link: string;
+      icon: {
+        name: string;
+        url: string;
+      };
     },
   ];
 };

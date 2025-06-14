@@ -1,58 +1,12 @@
-import { getAbout, getTechStack } from "@/services/strapi";
 import { type TechStack, type AboutType } from "@/types";
-import { useEffect, useState } from "react";
 
-function About() {
-  const [about, setAbout] = useState<AboutType>();
-  const [techStacks, setTechStacks] = useState<TechStack[]>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  const baseUrl = import.meta.env.VITE_API_ENDPOINT;
-
-  useEffect(() => {
-    const fetchAbout = async () => {
-      try {
-        const data = await getAbout();
-        setAbout(data);
-      } catch (err) {
-        setError("Failed to fetch about data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchTech = async () => {
-      try {
-        const data = await getTechStack();
-        setTechStacks(data);
-        console.log("tech", data);
-      } catch (err) {
-        setError("Failed to fetch tech stack data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    Promise.all([fetchAbout(), fetchTech()])
-      .then(() => {
-        console.log("All data fetched successfully");
-      })
-      .catch((error) => {
-        console.error("Error in fetching data:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading || !about || !techStacks) {
-    return <div className="py-10 text-center">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="py-10 text-center text-red-500">{error}</div>;
-  }
+function About({
+  about,
+  techStacks,
+}: {
+  about: AboutType | undefined;
+  techStacks: TechStack[] | undefined;
+}) {
 
   return (
     <section
@@ -81,13 +35,13 @@ function About() {
             >
               <div className="h-14 w-14">
                 <img
-                  src={baseUrl + tech.tech_image.url}
+                  src={tech.tech_image.url}
                   className="object-cover"
                 />
               </div>
               <div>
-                <p className="text-xl font-semibold text-center">{tech.name}</p>
-                <p className="text-sm font-normal text-gray-600">
+                <p className="text-center text-xl font-semibold">{tech.name}</p>
+                <p className="text-sm font-normal text-center text-gray-600">
                   {tech.proficiency_level}
                 </p>
               </div>

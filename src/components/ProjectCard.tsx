@@ -1,25 +1,28 @@
 import { Github, SquareArrowOutUpRight } from "lucide-react";
-import project_img from "../assets/project1.png";
 import Tag from "./Tag";
-import type { Project } from "@/types";
+import type { ProjectType } from "@/types";
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project }: { project: ProjectType }) {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center rounded-2xl shadow-md">
-      <div className="h-1/2 w-full md:h-3/5">
-        <img
-          src={project_img}
-          className="h-full w-full rounded-t-2xl object-cover"
-        />
+      <div className="h-1/2 w-full md:h-2/5">
+        <a href={project.demo} target="_blank" rel="noopener noreferrer">
+          <img
+            src={project.preview_image.url}
+            alt={project.name}
+            className="h-full w-full rounded-t-2xl object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+            loading="lazy"
+          />
+        </a>
       </div>
-      <div className="flex h-1/2 w-full flex-col gap-2 p-4 md:h-2/5">
+      <div className="flex h-auto w-full flex-col gap-2 p-4 md:h-3/5">
         <h1 className="text-md font-bold lg:text-2xl">{project.name}</h1>
         <p className="flex-auto text-sm text-zinc-700 md:mt-2">
           {project.description}
         </p>
-        <div className="flex w-full gap-2 md:mt-2">
+        <div className="flex w-full flex-wrap gap-2 md:mt-2">
           {project.stacks.map((tech) => (
-            <Tag name={tech.name} />
+            <Tag key={tech.id} name={tech.name} />
           ))}
         </div>
 

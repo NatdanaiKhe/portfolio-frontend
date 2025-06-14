@@ -1,33 +1,6 @@
-import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { type Project } from "@/types";
-import { getProject } from "@/services/strapi";
-function Project() {
-  const [projects, setProjects] = useState<Project[]>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getProject();
-        setProjects(data);
-      } catch (err) {
-        setError("Failed to fetch home data");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading || !projects) {
-    return <div className="py-10 text-center">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="py-10 text-center text-red-500">{error}</div>;
-  }
+import { type ProjectType } from "@/types";
+function Project({ projects }: { projects: ProjectType[] }) {
   return (
     <section
       id="projects"
@@ -41,8 +14,8 @@ function Project() {
         </p>
 
         <div className="mt-4 grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard project={project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
           ))}
         </div>
       </div>
