@@ -1,13 +1,12 @@
-import { type TechStack, type AboutType } from "@/types";
+import { type TechStackType, type AboutType } from "@/types";
 
 function About({
   about,
   techStacks,
 }: {
   about: AboutType | undefined;
-  techStacks: TechStack[] | undefined;
+  techStacks: TechStackType[] | undefined;
 }) {
-
   return (
     <section
       id="about"
@@ -28,20 +27,17 @@ function About({
         <div className="mt-4 grid h-auto w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {/* skill card */}
 
-          {techStacks?.map((tech: TechStack, index) => (
+          {techStacks?.map((tech: TechStackType, index) => (
             <div
               key={index}
               className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-gray-200 p-2 shadow-md hover:scale-105"
             >
               <div className="h-14 w-14">
-                <img
-                  src={tech.tech_image.url}
-                  className="object-cover"
-                />
+                <img src={tech.tech_image.url} className="object-cover" />
               </div>
               <div>
                 <p className="text-center text-xl font-semibold">{tech.name}</p>
-                <p className="text-sm font-normal text-center text-gray-600">
+                <p className="text-center text-sm font-normal text-gray-600">
                   {tech.proficiency_level}
                 </p>
               </div>
