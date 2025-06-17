@@ -1,9 +1,9 @@
-type AppData = {
+export type AppData = {
   home: HomeData;
   about: AboutType;
-  techStack: TechStack[];
-  projects: Project[];
-  contact: Contact;
+  techStack: TechStackType[];
+  projects: ProjectType[];
+  contact: ContactType;
 };
 
 export type HomeData = {
