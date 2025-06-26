@@ -1,10 +1,29 @@
 import { ArrowRight, Circle } from "lucide-react";
 import { Link } from "react-scroll";
 import type { HomeData } from "@/types";
+import { useEffect, useRef } from "react";
+import { useAnimation, useInView ,motion} from "motion/react";
+import { motionVariant } from "@/config/motionConfig";
+
 
 function Home({ homeData }: { homeData: HomeData }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "-100px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [inView, controls]);
   return (
-    <section
+    <motion.section
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={motionVariant}
       id="home"
       className="flex min-h-screen w-full flex-col-reverse items-center justify-around px-4 pt-16 md:flex-row md:justify-center"
     >
@@ -63,7 +82,7 @@ function Home({ homeData }: { homeData: HomeData }) {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

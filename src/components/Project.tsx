@@ -1,6 +1,21 @@
 import ProjectCard from "./ProjectCard";
 import { type ProjectType } from "@/types";
+import { useEffect, useRef } from "react";
+import { useAnimation, useInView, motion } from "motion/react";
+import { motionVariant } from "@/config/motionConfig";
+
 function Project({ projects }: { projects: ProjectType[] }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "-100px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }else{
+      controls.start('hidden')
+    }
+  }, [inView, controls]);
   return (
     <section
       id="projects"
@@ -13,11 +28,17 @@ function Project({ projects }: { projects: ProjectType[] }) {
           challenges that helped me grow.
         </p>
 
-        <div className="mt-4 grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={motionVariant}
+          className="mt-4 grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2"
+        >
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

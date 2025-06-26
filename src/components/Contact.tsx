@@ -1,10 +1,27 @@
 import { type ContactType } from "@/types";
 import { Link, Mail, MapPin,  } from "lucide-react";
-
+import { useEffect, useRef } from "react";
+import { useAnimation, useInView, motion } from "motion/react";
+import { motionVariant } from "@/config/motionConfig";
 
 function Contact({ contact }: { contact: ContactType }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "-100px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }else{
+      controls.start('hidden')
+    }
+  }, [inView, controls]);
   return (
-    <section
+    <motion.section
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={motionVariant}
       id="contact"
       className="flex h-auto min-h-[calc(50svh-65px)] w-full flex-col items-center justify-center p-4 md:px-12"
     >
@@ -54,7 +71,6 @@ function Contact({ contact }: { contact: ContactType }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {/* TODO: add icon for each social */}
               <img
                 className="inline h-6 w-6"
                 src={social.icon.url}
@@ -64,7 +80,7 @@ function Contact({ contact }: { contact: ContactType }) {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

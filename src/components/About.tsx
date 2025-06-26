@@ -1,4 +1,7 @@
 import { type TechStackType, type AboutType } from "@/types";
+import { useEffect, useRef } from "react";
+import { useAnimation, useInView, motion } from "motion/react";
+import { motionVariant } from "@/config/motionConfig";
 
 function About({
   about,
@@ -7,6 +10,18 @@ function About({
   about: AboutType | undefined;
   techStacks: TechStackType[] | undefined;
 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "-100px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [inView, controls]);
+
   return (
     <section
       id="about"
@@ -24,7 +39,13 @@ function About({
 
       <div className="mx-auto flex h-auto w-full flex-col justify-center xl:w-[1200px]">
         <h2 className="text-2xl font-semibold">Skills</h2>
-        <div className="mt-4 grid h-auto w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={motionVariant}
+          className="mt-4 grid h-auto w-full grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
+        >
           {/* skill card */}
 
           {techStacks?.map((tech: TechStackType, index) => (
@@ -43,7 +64,7 @@ function About({
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
