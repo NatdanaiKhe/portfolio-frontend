@@ -23,7 +23,7 @@ function Project({ projects }: { projects: ProjectType[] }) {
     >
       <div className="container mx-auto flex h-full w-full flex-col">
         <h1 className="text-center text-4xl font-bold">Projects</h1>
-        <p className="mt-4 text-center text-sm text-zinc-700">
+        <p className="mt-4 text-center text-sm text-white/80">
           Here are some of my recent projects. Each one presented unique
           challenges that helped me grow.
         </p>

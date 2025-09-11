@@ -49,11 +49,11 @@ function NavBar() {
   );
 
   return (
-    <nav className="fixed top-0 z-40 flex h-16 w-full justify-between bg-zinc-100 px-4 shadow-sm md:px-12">
+    <nav className="fixed top-0 z-40 flex h-16 w-full justify-between bg-black px-4 shadow-sm md:px-12">
       <div className="h-16 w-16">
         <img className="object-contain" src="/logo.png" alt="Logo" />
       </div>
-      <ul className="hidden w-fit flex-row items-center justify-center gap-10 text-xl font-semibold text-zinc-950 md:flex">
+      <ul className="hidden w-fit flex-row items-center justify-center gap-10 text-xl font-semibold text-white/80 md:flex">
         {menuList}
       </ul>
 

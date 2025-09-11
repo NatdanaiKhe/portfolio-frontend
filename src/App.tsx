@@ -59,7 +59,7 @@ function App() {
   }
 
   return (
-    <div className="justify-centers flex min-h-screen w-full flex-col scroll-smooth bg-zinc-100">
+    <div className="justify-centers flex min-h-screen w-full flex-col scroll-smooth bg-black">
       {/* <GlowingCursor /> */}
       <NavBar />
       <Home homeData={appData.home} />

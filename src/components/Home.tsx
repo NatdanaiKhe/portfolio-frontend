@@ -28,15 +28,15 @@ function Home({ homeData }: { homeData: HomeData }) {
       className="flex min-h-screen w-full flex-col-reverse items-center justify-around px-4 pt-16 md:flex-row md:justify-center"
     >
       {/* detail */}
-      <div className="flex h-3/5 w-full flex-col justify-start text-zinc-950 md:h-3/5 md:w-[500px] md:justify-center">
+      <div className="flex h-3/5 w-full flex-col justify-start md:h-3/5 md:w-[500px] md:justify-center">
         <h3 className="text-xl font-medium">Hello, I'm Jack</h3>
         <h1 className="mt-4 text-4xl font-bold">Software Developer</h1>
 
-        <p className="text-md mt-4 font-medium text-wrap text-zinc-700">
+        <p className="text-md mt-4 font-medium text-wrap text-white/80">
           I'm a front-end developer with a passion for creating clean,
           responsive user interfaces.
         </p>
-        <p className="text-md font-medium text-wrap text-zinc-700">
+        <p className="text-md font-medium text-wrap text-white/80">
           Lately, I've been expanding into full-stack development to build more
           complete, end-to-end web solutions.
         </p>
@@ -66,10 +66,10 @@ function Home({ homeData }: { homeData: HomeData }) {
         <div className="relative w-3/4 sm:w-[300px] md:w-[500px]">
           <img
             src={homeData.profile_image.url}
-            className="aspect-square rounded-full border-10 border-white object-cover shadow-lg"
+            className="aspect-square rounded-full border-10 border-zinc-800 object-cover shadow-lg"
             alt="Profile"
           />
-          <div className="absolute right-0 bottom-0 flex h-10 w-[200px] items-center justify-start gap-4 rounded-2xl bg-white px-2 shadow-lg">
+          <div className="absolute right-0 bottom-0 flex h-10 w-[200px] items-center justify-start gap-4 rounded-2xl bg-white px-2 text-black shadow-lg">
             <Circle
               className={`inline ${
                 homeData.available_status

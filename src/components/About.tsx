@@ -25,13 +25,13 @@ function About({
   return (
     <section
       id="about"
-      className="flex h-auto min-h-[calc(100svh-65px)] w-full flex-col items-center justify-center px-4 pt-4 text-zinc-950 md:px-12"
+      className="flex h-auto min-h-[calc(100svh-65px)] w-full flex-col items-center justify-center px-4 pt-4 md:px-12"
     >
       <div className="mx-auto h-auto w-full xl:w-[1200px]">
         <h1 className="text-4xl font-bold">About Me</h1>
         <div className="mt-10 w-full">
           <h2 className="text-2xl font-semibold">My Background</h2>
-          <p className="mt-4 text-zinc-700">{about?.background}</p>
+          <p className="mt-4 text-white/80">{about?.background}</p>
         </div>
       </div>
 
@@ -51,14 +51,14 @@ function About({
           {techStacks?.map((tech: TechStackType, index) => (
             <div
               key={index}
-              className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-gray-200 p-2 shadow-md hover:scale-105"
+              className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-gray-900/50 p-2 shadow-md hover:scale-105"
             >
               <div className="h-14 w-14">
                 <img src={tech.tech_image.url} className="object-cover" />
               </div>
               <div>
                 <p className="text-center text-xl font-semibold">{tech.name}</p>
-                <p className="text-center text-sm font-normal text-gray-600">
+                <p className="text-center text-sm font-normal text-white/80">
                   {tech.proficiency_level}
                 </p>
               </div>

@@ -4,21 +4,14 @@ import { Link } from "react-scroll";
 function Footer() {
   const date = new Date();
   return (
-    <footer className="flex h-auto flex-col items-center justify-between gap-4 rounded-lg border-t-2 border-zinc-200 bg-zinc-100 p-4 md:h-16 md:flex-row">
-      <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+    <footer className="border-grey-900 flex h-auto flex-col items-center justify-between gap-4 rounded-lg border-gray-900 border-t-2 p-4 md:h-16 md:flex-row">
+      <span className="block text-sm text-white/80 sm:text-center">
         ©{date.getFullYear()}{" "}
         <a className="hover:underline">Natdanai Khemtong. </a>
         All Rights Reserved.
       </span>
 
-      <div>
-        <p>
-          Build with <Heart fill="red" className="mx-2 inline" /> using React &
-          Tailwind
-        </p>
-      </div>
-
-      <ul className="mb-6 flex flex-wrap items-center gap-4 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+      <ul className="mb-6 flex flex-wrap items-center gap-4 text-sm font-medium text-white/80 sm:mb-0">
         <li className="cursor-pointer hover:text-zinc-700">
           <Link smooth={true} duration={500} to="home">
             Home

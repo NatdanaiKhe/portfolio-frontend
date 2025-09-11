@@ -26,7 +26,7 @@ function Contact({ contact }: { contact: ContactType }) {
       className="flex h-auto min-h-[calc(50svh-65px)] w-full flex-col items-center justify-center p-4 md:px-12"
     >
       <h1 className="text-4xl font-bold">Get In Touch</h1>
-      <p className="mt-4 text-sm text-zinc-700">
+      <p className="mt-4 text-sm text-white/80">
         Have a project in mind or want to discuss potential opportunities? I'd
         love to hear from you!
       </p>
@@ -34,7 +34,7 @@ function Contact({ contact }: { contact: ContactType }) {
         {/* email */}
         <div className="mt-4 w-full">
           <label
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="mb-2 block text-sm font-bold "
             htmlFor="email"
           >
             <Mail className="mr-2 inline" />
@@ -48,7 +48,7 @@ function Contact({ contact }: { contact: ContactType }) {
         {/* location */}
         <div className="mt-4 w-full">
           <label
-            className="mb-2 block text-sm font-bold text-gray-700"
+            className="mb-2 block text-sm font-bold "
             htmlFor="location"
           >
             <MapPin className="mr-2 inline" />
@@ -59,7 +59,7 @@ function Contact({ contact }: { contact: ContactType }) {
 
         {/* connect */}
         <div className="mt-4 w-full">
-          <p className="mb-2 block text-sm font-bold text-gray-700">
+          <p className="mb-2 block text-sm font-bold ">
             <Link className="mr-2 inline" />
             Connect with me
           </p>
