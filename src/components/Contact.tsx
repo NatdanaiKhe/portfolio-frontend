@@ -26,7 +26,7 @@ function Contact({ contact }: { contact: ContactType }) {
       className="flex h-auto min-h-[calc(50svh-65px)] w-full flex-col items-center justify-center p-4 md:px-12"
     >
       <h1 className="text-4xl font-bold">Get In Touch</h1>
-      <p className="mt-4 text-sm text-white/80">
+      <p className="mt-4 text-white/80">
         Have a project in mind or want to discuss potential opportunities? I'd
         love to hear from you!
       </p>

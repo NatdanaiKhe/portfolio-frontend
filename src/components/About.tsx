@@ -27,15 +27,28 @@ function About({
       id="about"
       className="flex h-auto min-h-[calc(100svh-65px)] w-full flex-col items-center justify-center px-4 pt-4 md:px-12"
     >
-      <div className="mx-auto h-auto w-full xl:w-[1200px]">
+      <div className="mx-auto h-auto w-full xl:max-w-[1200px]">
         <h1 className="text-4xl font-bold">About Me</h1>
-        <div className="mt-10 w-full">
-          <h2 className="text-2xl font-semibold">My Background</h2>
-          <p className="mt-4 text-white/80">{about?.background}</p>
+
+        <div className="grid w-full gap-4 md:grid-cols-5 md:grid-rows-2">
+          <div className="md:col-span-3 md:row-span-2">
+            <h2 className="text-2xl font-semibold">My Background</h2>
+            <p className="mt-4 text-white/80">{about?.background}</p>
+          </div>
+          <div>
+            <h3 className="text-2xl font-semibold md:col-span-2 md:col-start-4">
+              Skills
+            </h3>
+            <p className="mt-4 text-white/80">{about?.experience}</p>
+          </div>
+          <div className="md:col-span-2 md:col-start-4 md:row-start-2">
+            <h3 className="text-2xl font-semibold">Education</h3>
+            <p className="mt-4 text-white/80">{about?.education}</p>
+          </div>
         </div>
       </div>
 
-      <div className="mt-4 mb-4 w-3/5 rounded-2xl border-1 border-gray-200"></div>
+      <div className="mt-5 mb-4 w-3/5 rounded-2xl border-1 border-gray-200"></div>
 
       <div className="mx-auto flex h-auto w-full flex-col justify-center xl:w-[1200px]">
         <h2 className="text-2xl font-semibold">Skills</h2>

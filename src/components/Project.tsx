@@ -12,8 +12,8 @@ function Project({ projects }: { projects: ProjectType[] }) {
   useEffect(() => {
     if (inView) {
       controls.start("visible");
-    }else{
-      controls.start('hidden')
+    } else {
+      controls.start("hidden");
     }
   }, [inView, controls]);
   return (
@@ -21,9 +21,9 @@ function Project({ projects }: { projects: ProjectType[] }) {
       id="projects"
       className="flex h-auto min-h-[calc(100svh-65px)] w-full flex-col items-center justify-center p-4 pt-16 md:px-12"
     >
-      <div className="container mx-auto flex h-full w-full flex-col">
+      <div className="mx-auto h-auto w-full flex-col xl:max-w-[1200px]">
         <h1 className="text-center text-4xl font-bold">Projects</h1>
-        <p className="mt-4 text-center text-sm text-white/80">
+        <p className="my-4 text-center text-white/80">
           Here are some of my recent projects. Each one presented unique
           challenges that helped me grow.
         </p>
@@ -33,7 +33,7 @@ function Project({ projects }: { projects: ProjectType[] }) {
           initial="hidden"
           animate={controls}
           variants={motionVariant}
-          className="mt-4 grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2"
+          className="mt-ภ grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
