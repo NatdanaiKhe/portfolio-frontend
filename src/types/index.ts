@@ -3,6 +3,7 @@ export type AppData = {
   about: AboutType;
   techStack: TechStackType[];
   projects: ProjectType[];
+  experience: ExperienceType[];
   contact: ContactType;
 };
 
@@ -22,6 +23,8 @@ export type HomeData = {
 export type AboutType = {
   id: number;
   background: string;
+  experience: string;
+  education: string;
 };
 
 export type TechStackType = {
@@ -49,6 +52,15 @@ export type ProjectType = {
     },
   ];
 };
+
+export type ExperienceType = {
+  exp_id: number;
+  title: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  detail: string;
+}
 
 export type ContactType = {
   email: string;

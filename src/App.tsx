@@ -11,10 +11,12 @@ import type { AppData } from "./types";
 import {
   getAbout,
   getContact,
+  getExperience,
   getHome,
   getProjects,
   getTechStack,
 } from "./services/strapi";
+import Experience from "./components/Experience";
 
 function App() {
   const [appData, setAppData] = useState<AppData | null>(null);
@@ -27,10 +29,11 @@ function App() {
       getAbout(),
       getTechStack(),
       getProjects(),
+      getExperience(), 
       getContact(),
     ])
-      .then(([home, about, techStack, projects, contact]) => {
-        setAppData({ home, about, techStack, projects, contact });
+      .then(([home, about, techStack, projects, experience, contact]) => {
+        setAppData({ home, about, techStack, projects, experience, contact });
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
@@ -65,6 +68,7 @@ function App() {
       <Home homeData={appData.home} />
       <About about={appData.about} techStacks={appData.techStack} />
       <Project projects={appData.projects} />
+      <Experience experience={appData.experience}/>
       <Contact contact={appData.contact} />
       <Footer />
     </div>

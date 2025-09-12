@@ -1,4 +1,3 @@
-import { Heart } from "lucide-react";
 import { Link } from "react-scroll";
 
 function Footer() {
@@ -25,6 +24,11 @@ function Footer() {
         <li className="cursor-pointer hover:text-zinc-700">
           <Link smooth={true} duration={500} to="projects">
             Projects
+          </Link>
+        </li>
+        <li className="cursor-pointer hover:text-zinc-700">
+          <Link smooth={true} duration={500} to="experience">
+            Experience
           </Link>
         </li>
         <li className="cursor-pointer hover:text-zinc-700">

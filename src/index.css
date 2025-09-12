@@ -9,7 +9,7 @@
 *::after {
   box-sizing: border-box;
   --bg-color: #343231;
-  --text-color:  #fffff2;
+  --text-color: #fffff2;
 }
 html {
   scroll-behavior: smooth;
@@ -39,6 +39,20 @@ button {
   height: 100%;
   display: flex;
   justify-content: center;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 28px;
+  bottom: 0;
+  width: 2px;
+  background-color: #333333;
+  z-index: 0;
+}
+.timeline-item:last-child::before {
+  display: none;
 }
 
 @theme inline {

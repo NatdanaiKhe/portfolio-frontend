@@ -1,4 +1,4 @@
-import type { HomeData, AboutType, TechStackType, ProjectType, ContactType } from "@/types";
+import type { HomeData, AboutType, TechStackType, ProjectType, ContactType, ExperienceType } from "@/types";
 
 const apiBaseUrl = import.meta.env.VITE_API_ENDPOINT + "/api";
 
@@ -26,6 +26,13 @@ export const getTechStack = async (): Promise<TechStackType[]> => {
 export const getProjects = async (): Promise<ProjectType[]> => {
   const res = await fetch(`${apiBaseUrl}/projects?populate=*`);
   if (!res.ok) throw new Error("Failed to fetch projects data");
+  const json = await res.json();
+  return json.data;
+};
+
+export const getExperience = async (): Promise<ExperienceType[]> => {
+  const res = await fetch(`${apiBaseUrl}/experiences?populate=*`);
+  if (!res.ok) throw new Error("Failed to fetch experience data");
   const json = await res.json();
   return json.data;
 };
