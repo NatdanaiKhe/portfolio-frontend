@@ -1,47 +1,37 @@
-import type { HomeData, AboutType, TechStackType, ProjectType, ContactType, ExperienceType } from "@/types";
+import type {
+  HomeData,
+  AboutType,
+  TechStackType,
+  ProjectType,
+  ContactType,
+  ExperienceType,
+} from "@/types";
+import { get } from "@/lib/httpClient";
 
-const apiBaseUrl = import.meta.env.VITE_API_ENDPOINT + "/api";
+type StrapiResponse<T> = { data: T };
 
-export const getHome = async (): Promise<HomeData> => {
-  const res = await fetch(`${apiBaseUrl}/home?populate=*`);  
-  if (!res.ok) throw new Error("Failed to fetch home data");
-  const json = await res.json();  
-  return json.data;
-};
+export const getHome = () =>
+  get<StrapiResponse<HomeData>>("/home?populate=*").then((r) => r.data);
 
-export const getAbout = async (): Promise<AboutType> => {
-  const res = await fetch(`${apiBaseUrl}/about?populate=*`);
-  if (!res.ok) throw new Error("Failed to fetch about data");
-  const json = await res.json();
-  return json.data;
-};
+export const getAbout = () =>
+  get<StrapiResponse<AboutType>>("/about?populate=*").then((r) => r.data);
 
-export const getTechStack = async (): Promise<TechStackType[]> => {
-  const res = await fetch(`${apiBaseUrl}/tech-stacks?populate=*`);
-  if (!res.ok) throw new Error("Failed to fetch tech stack data");
-  const json = await res.json();
-  return json.data;
-};
-
-export const getProjects = async (): Promise<ProjectType[]> => {
-  const res = await fetch(`${apiBaseUrl}/projects?populate=*`);
-  if (!res.ok) throw new Error("Failed to fetch projects data");
-  const json = await res.json();
-  return json.data;
-};
-
-export const getExperience = async (): Promise<ExperienceType[]> => {
-  const res = await fetch(`${apiBaseUrl}/experiences?populate=*`);
-  if (!res.ok) throw new Error("Failed to fetch experience data");
-  const json = await res.json();
-  return json.data;
-};
-
-export const getContact = async (): Promise<ContactType> => {
-  const res = await fetch(
-    `${apiBaseUrl}/contact?populate[socials][populate]=icon`,
+export const getTechStack = () =>
+  get<StrapiResponse<TechStackType[]>>("/tech-stacks?populate=*").then(
+    (r) => r.data,
   );
-  if (!res.ok) throw new Error("Failed to fetch contact data");
-  const json = await res.json();
-  return json.data;
-};
+
+export const getProjects = () =>
+  get<StrapiResponse<ProjectType[]>>("/projects?populate=*").then(
+    (r) => r.data,
+  );
+
+export const getExperience = () =>
+  get<StrapiResponse<ExperienceType[]>>("/experiences?populate=*").then(
+    (r) => r.data,
+  );
+
+export const getContact = () =>
+  get<StrapiResponse<ContactType>>(
+    "/contact?populate[socials][populate]=icon",
+  ).then((r) => r.data);
