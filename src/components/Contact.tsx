@@ -3,6 +3,7 @@ import { Link, Mail, MapPin,  } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useAnimation, useInView, motion } from "motion/react";
 import { motionVariant } from "@/config/motionConfig";
+import { getCmsImageProps } from "@/lib/mediaUrl";
 
 function Contact({ contact }: { contact: ContactType }) {
   const ref = useRef(null);
@@ -73,7 +74,7 @@ function Contact({ contact }: { contact: ContactType }) {
             >
               <img
                 className="inline h-6 w-6"
-                src={social.icon.url}
+                {...getCmsImageProps(social.icon.url)}
                 alt={social.name}
               />
             </a>

@@ -2,6 +2,7 @@ import { type TechStackType, type AboutType } from "@/types";
 import { useEffect, useRef } from "react";
 import { useAnimation, useInView, motion } from "motion/react";
 import { motionVariant } from "@/config/motionConfig";
+import { getCmsImageProps } from "@/lib/mediaUrl";
 
 function About({
   about,
@@ -67,7 +68,10 @@ function About({
               className="flex h-full w-full flex-col items-center justify-center rounded-xl bg-gray-900/50 p-2 shadow-md hover:scale-105"
             >
               <div className="h-14 w-14">
-                <img src={tech.tech_image.url} className="object-cover" />
+                <img
+                  {...getCmsImageProps(tech.tech_image.url)}
+                  className="object-cover"
+                />
               </div>
               <div>
                 <p className="text-center text-xl font-semibold">{tech.name}</p>

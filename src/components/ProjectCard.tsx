@@ -1,6 +1,7 @@
 import { Github, SquareArrowOutUpRight } from "lucide-react";
 import Tag from "./Tag";
 import type { ProjectType } from "@/types";
+import { getCmsImageProps } from "@/lib/mediaUrl";
 
 function ProjectCard({ project }: { project: ProjectType }) {
   return (
@@ -8,7 +9,7 @@ function ProjectCard({ project }: { project: ProjectType }) {
       <div className="h-1/2 w-full md:h-2/5">
         <a href={project.demo} target="_blank" rel="noopener noreferrer">
           <img
-            src={project.preview_image.url}
+            {...getCmsImageProps(project.preview_image.url)}
             alt={project.name}
             className="h-full w-full rounded-t-2xl object-cover transition-transform duration-300 ease-in-out hover:scale-105"
             loading="lazy"

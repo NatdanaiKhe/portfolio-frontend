@@ -28,7 +28,10 @@ export async function get<T>(path: string, options?: GetOptions): Promise<T> {
   }
 
   const res = await fetch(`${config.apiBaseUrl}${path}`, {
-    headers: { Accept: "application/json" },
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_CMS_TOKEN}`,
+    },
   });
 
   if (!res.ok) {
