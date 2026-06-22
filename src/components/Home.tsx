@@ -2,9 +2,9 @@ import { ArrowRight, Circle } from "lucide-react";
 import { Link } from "react-scroll";
 import type { HomeData } from "@/types";
 import { useEffect, useRef } from "react";
-import { useAnimation, useInView ,motion} from "motion/react";
+import { useAnimation, useInView, motion } from "motion/react";
 import { motionVariant } from "@/config/motionConfig";
-
+import { getCmsImageProps } from "@/lib/mediaUrl";
 
 function Home({ homeData }: { homeData: HomeData }) {
   const ref = useRef(null);
@@ -65,7 +65,7 @@ function Home({ homeData }: { homeData: HomeData }) {
       <div className="w-ful md:2/5 flex h-1/2 items-center justify-center gap-4 md:w-1/2">
         <div className="relative w-3/4 sm:w-[300px] md:w-[500px]">
           <img
-            src={homeData.profile_image.url}
+            {...getCmsImageProps(homeData.profile_image.url)}
             className="aspect-square rounded-full border-10 border-zinc-800 object-cover shadow-lg"
             alt="Profile"
           />
