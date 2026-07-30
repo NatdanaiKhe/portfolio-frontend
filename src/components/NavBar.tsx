@@ -10,7 +10,7 @@ function NavBar() {
   };
 
   const handleLinkClick = () => {
-    setIsMenuOpen(false); 
+    setIsMenuOpen(false);
   };
 
   const menuList = (
@@ -61,7 +61,7 @@ function NavBar() {
   return (
     <nav className="fixed top-0 z-40 flex h-16 w-full justify-between bg-black px-4 shadow-sm md:px-12">
       <div className="h-16 w-16">
-        <img className="object-contain" src="https://brave-delight-5b9bbea6ce.media.strapiapp.com/N_removebg_preview_29cbf1204c.png" alt="Logo" />
+        <img className="object-contain" src="/logo_main.png" alt="Logo" />
       </div>
       <ul className="hidden w-fit flex-row items-center justify-center gap-10 text-xl font-semibold text-white/80 md:flex">
         {menuList}
