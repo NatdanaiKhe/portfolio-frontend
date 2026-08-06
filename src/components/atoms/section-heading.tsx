@@ -6,12 +6,14 @@ import type { ReactNode } from "react";
 interface SectionHeadingProps {
   children: ReactNode;
   as?: "h1" | "h2";
+  id?: string;
   className?: string;
 }
 
 export function SectionHeading({
   children,
   as: Tag = "h2",
+  id,
   className = "",
 }: SectionHeadingProps) {
   const reduce = useReducedMotion();
@@ -24,6 +26,7 @@ export function SectionHeading({
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       <Tag
+        id={id}
         className={`text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl ${className}`}
       >
         {children}

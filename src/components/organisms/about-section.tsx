@@ -16,10 +16,10 @@ export function AboutSection({
   const reduce = useReducedMotion();
 
   return (
-    <section id="about" className="px-6 py-32 md:px-12 lg:px-24">
+    <section id="about" aria-labelledby="about-title" className="px-6 py-32 md:px-12 lg:px-24">
       <div className="mx-auto max-w-[1280px]">
         <SectionEyebrow>About Me</SectionEyebrow>
-        <SectionHeading>My Background</SectionHeading>
+        <SectionHeading id="about-title">My Background</SectionHeading>
 
         {/* Asymmetric Bento grid */}
         <div className="mt-12 grid gap-6 md:grid-cols-12 md:grid-rows-[auto,auto]">

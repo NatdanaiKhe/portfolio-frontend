@@ -10,9 +10,9 @@ export function ContactSection({ contact }: { contact: ContactType }) {
   const reduce = useReducedMotion();
 
   return (
-    <section id="contact" className="px-6 py-32 md:px-12 lg:px-24">
+    <section id="contact" aria-labelledby="contact-title" className="px-6 py-32 md:px-12 lg:px-24">
       <div className="mx-auto max-w-[1280px]">
-        <SectionHeading>Get in Touch</SectionHeading>
+        <SectionHeading id="contact-title">Get in Touch</SectionHeading>
 
         <motion.p
           className="mt-4 max-w-lg text-sm leading-relaxed text-text-faint"

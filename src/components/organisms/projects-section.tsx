@@ -10,10 +10,10 @@ export function ProjectsSection({ projects }: { projects: ProjectType[] }) {
   const reduce = useReducedMotion();
 
   return (
-    <section id="projects" className="px-6 py-32 md:px-12 lg:px-24">
+    <section id="projects" aria-labelledby="projects-title" className="px-6 py-32 md:px-12 lg:px-24">
       <div className="mx-auto max-w-[1280px]">
         <SectionEyebrow>Selected Work</SectionEyebrow>
-        <SectionHeading>Projects</SectionHeading>
+        <SectionHeading id="projects-title">Projects</SectionHeading>
 
         <motion.p
           className="mt-4 max-w-lg text-sm leading-relaxed text-text-faint"

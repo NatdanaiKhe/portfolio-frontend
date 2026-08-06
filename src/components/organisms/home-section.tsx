@@ -13,6 +13,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
   return (
     <section
       id="home"
+      aria-labelledby="home-title"
       className="flex min-h-[100dvh] w-full flex-col items-center justify-center gap-12 px-6 pt-24 md:flex-row md:gap-16 md:px-12 lg:gap-24"
     >
       {/* Text block */}
@@ -27,6 +28,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
         </motion.p>
 
         <motion.h1
+          id="home-title"
           className="text-4xl font-bold tracking-tighter text-text leading-[1.1] md:text-5xl lg:text-6xl"
           initial={reduce ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -78,7 +80,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
                   ? getCmsImageUrl(homeData.profile_image.url)
                   : "/logo.svg"
               }
-              alt="Profile"
+              alt="Natdanai Khemthong — Front-End Developer profile photo"
               width={400}
               height={400}
               className="h-64 w-64 object-cover md:h-80 md:w-80"

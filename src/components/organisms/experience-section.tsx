@@ -15,13 +15,13 @@ export function ExperienceSection({
   const sorted = [...experience].sort((a, b) => b.exp_id - a.exp_id);
 
   return (
-    <section id="experience" className="px-6 py-32 md:px-12 lg:px-24">
+    <section id="experience" aria-labelledby="experience-title" className="px-6 py-32 md:px-12 lg:px-24">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-12 md:grid-cols-12">
           {/* Left: sticky heading */}
           <div className="md:col-span-4">
             <div className="md:sticky md:top-32">
-              <SectionHeading>Experience</SectionHeading>
+              <SectionHeading id="experience-title">Experience</SectionHeading>
             </div>
           </div>
 

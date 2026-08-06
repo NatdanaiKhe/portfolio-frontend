@@ -26,6 +26,7 @@ export function NavBar() {
     <>
       {/* Fluid Island Nav — floating glass pill */}
       <motion.nav
+        aria-label="Primary"
         className="fixed top-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-6 rounded-full border border-text/[0.08] bg-bg/60 px-6 py-3 backdrop-blur-xl shadow-[inset_0_1px_0_var(--surface-highlight)]"
         initial={reduce ? false : { y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

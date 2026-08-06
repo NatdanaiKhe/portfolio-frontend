@@ -15,10 +15,11 @@ export function TechStackSection({
   return (
     <section
       id="tech-stack"
+      aria-labelledby="tech-stack-title"
       className="px-6 py-32 md:px-12 lg:px-24"
     >
       <div className="mx-auto max-w-[1280px]">
-        <SectionHeading>Tech Stack</SectionHeading>
+        <SectionHeading id="tech-stack-title">Tech Stack</SectionHeading>
 
         <motion.p
           className="mt-4 max-w-lg text-sm leading-relaxed text-text-faint"

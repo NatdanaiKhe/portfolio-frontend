@@ -27,7 +27,7 @@ export function Footer() {
           &copy; {year} Natdanai Khemthong. All rights reserved.
         </motion.p>
 
-        <nav className="flex flex-wrap items-center gap-4">
+        <nav aria-label="Footer" className="flex flex-wrap items-center gap-4">
           {footerLinks.map((link, i) => (
             <motion.a
               key={link.href}
