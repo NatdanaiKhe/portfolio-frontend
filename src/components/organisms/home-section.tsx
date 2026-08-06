@@ -14,12 +14,13 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
     <section
       id="home"
       aria-labelledby="home-title"
-      className="flex min-h-[100dvh] w-full flex-col items-center justify-center gap-12 px-6 pt-24 md:flex-row md:gap-16 md:px-12 lg:gap-24"
+      className="flex min-h-[100dvh] w-full flex-col items-center justify-center gap-12 px-6 pt-24 md:flex-row md:gap-16 md:px-12 lg:gap-24 lg:px-24"
     >
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center justify-center gap-12 md:flex-row md:gap-16 lg:gap-24">
       {/* Text block */}
       <div className="flex max-w-lg flex-col items-start">
         <motion.p
-          className="mb-3 inline-block rounded-full border border-text/[0.06] bg-text/[0.03] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-text-muted"
+          className="border-text/[0.06] bg-text/[0.03] text-text-muted mb-3 inline-block rounded-full border px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase"
           initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -29,7 +30,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
 
         <motion.h1
           id="home-title"
-          className="text-4xl font-bold tracking-tighter text-text leading-[1.1] md:text-5xl lg:text-6xl"
+          className="text-text text-4xl leading-[1.1] font-bold tracking-tighter md:text-5xl lg:text-6xl"
           initial={reduce ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -40,13 +41,13 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
         </motion.h1>
 
         <motion.p
-          className="mt-6 max-w-md text-base leading-relaxed text-text-muted md:text-lg"
+          className="text-text-muted mt-6 max-w-md text-base leading-relaxed md:text-lg"
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
-          I build clean, responsive user interfaces with a passion for crafting
-          end-to-end web solutions that feel premium and perform at scale.
+          Full Stack Developer specializing in React, Next.js & React Native
+          Building scalable web and mobile products from frontend to backend
         </motion.p>
 
         <motion.div
@@ -72,7 +73,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
         transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* Double-Bezel wrapper */}
-        <div className="rounded-[2rem] border border-text/[0.06] bg-text/[0.02] p-1.5 shadow-[inset_0_1px_0_var(--surface-highlight)]">
+        <div className="border-text/[0.06] bg-text/[0.02] rounded-[2rem] border p-1.5 shadow-[inset_0_1px_0_var(--surface-highlight)]">
           <div className="relative overflow-hidden rounded-[calc(2rem-0.375rem)]">
             <Image
               src={
@@ -92,7 +93,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
 
         {/* Availability badge */}
         <motion.div
-          className="absolute -bottom-2 -right-2 flex items-center gap-2 rounded-full border border-text/[0.08] bg-bg-subtle px-4 py-2 shadow-lg"
+          className="border-text/[0.08] bg-bg-subtle absolute -right-2 -bottom-2 flex items-center gap-2 rounded-full border px-4 py-2 shadow-lg"
           initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7 }}
@@ -105,11 +106,12 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
             }`}
             fill={homeData.available_status ? "#34d399" : "#f87171"}
           />
-          <span className="text-xs font-medium text-text-muted">
+          <span className="text-text-muted text-xs font-medium">
             {homeData.available_status ? "Available for work" : "Not available"}
           </span>
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }
