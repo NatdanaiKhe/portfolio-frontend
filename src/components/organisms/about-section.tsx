@@ -16,7 +16,11 @@ export function AboutSection({
   const reduce = useReducedMotion();
 
   return (
-    <section id="about" aria-labelledby="about-title" className="px-6 py-32 md:px-12 lg:px-24">
+    <section
+      id="about"
+      aria-labelledby="about-title"
+      className="px-6 py-32 md:px-12 lg:px-24"
+    >
       <div className="mx-auto max-w-[1280px]">
         <SectionEyebrow>About Me</SectionEyebrow>
         <SectionHeading id="about-title">My Background</SectionHeading>
@@ -76,6 +80,7 @@ export function AboutSection({
         </div>
 
         {/* Tech Stack chips */}
+
         {techStacks.length > 0 && (
           <>
             <motion.div
@@ -85,7 +90,7 @@ export function AboutSection({
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             />
-
+            <SectionEyebrow>Tech Stack</SectionEyebrow>
             <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
               {techStacks.map((tech, i) => (
                 <TechStackChip key={tech.name} tech={tech} index={i} />

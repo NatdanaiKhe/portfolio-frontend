@@ -11,7 +11,6 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
-  { label: "Tech Stack", href: "#tech-stack" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -27,7 +26,7 @@ export function NavBar() {
       {/* Fluid Island Nav — floating glass pill */}
       <motion.nav
         aria-label="Primary"
-        className="fixed top-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-6 rounded-full border border-text/[0.08] bg-bg/60 px-6 py-3 backdrop-blur-xl shadow-[inset_0_1px_0_var(--surface-highlight)]"
+        className="border-text/[0.08] bg-bg/60 fixed top-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-6 rounded-full border px-6 py-3 shadow-[inset_0_1px_0_var(--surface-highlight)] backdrop-blur-xl"
         initial={reduce ? false : { y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -72,7 +71,7 @@ export function NavBar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 bg-bg/90 backdrop-blur-2xl md:hidden"
+            className="bg-bg/90 fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 backdrop-blur-2xl md:hidden"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -84,7 +83,7 @@ export function NavBar() {
                 key={item.href}
                 href={item.href}
                 onClick={close}
-                className="text-2xl font-semibold tracking-tight text-text-muted transition-colors hover:text-text"
+                className="text-text-muted hover:text-text text-2xl font-semibold tracking-tight transition-colors"
                 initial={reduce ? false : { opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 24 }}
