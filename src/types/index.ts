@@ -10,6 +10,7 @@ export type AppData = {
 export type HomeData = {
   id: number;
   documentId: string;
+  updatedAt?: string;
   available_status: boolean;
   profile_image: {
     url: string;
@@ -22,6 +23,7 @@ export type HomeData = {
 
 export type AboutType = {
   id: number;
+  updatedAt?: string;
   background: string;
   experience: string;
   education: string;
@@ -45,12 +47,10 @@ export type ProjectType = {
     name: string;
     url: string;
   };
-  stacks: [
-    {
-      id: number;
-      name: string;
-    },
-  ];
+  stacks: Array<{
+    id: number;
+    name: string;
+  }>;
 };
 
 export type ExperienceType = {
@@ -65,15 +65,13 @@ export type ExperienceType = {
 export type ContactType = {
   email: string;
   location: string;
-  socials: [
-    {
-      id: number;
+  socials: Array<{
+    id: number;
+    name: string;
+    link: string;
+    icon: {
       name: string;
-      link: string;
-      icon: {
-        name: string;
-        url: string;
-      };
-    },
-  ];
+      url: string;
+    };
+  }>;
 };
