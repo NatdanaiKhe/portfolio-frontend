@@ -19,7 +19,7 @@ export default async function Page() {
       "@type": "Person" as const,
       name: SITE.name,
       url: SITE.url,
-      jobTitle: "Front-End Developer",
+      jobTitle: "Full Stack Developer",
       knowsAbout: techNames,
       sameAs: socialUrls.length > 0 ? socialUrls : undefined,
     };
@@ -33,7 +33,8 @@ export default async function Page() {
         <PageSections data={data} />
       </>
     );
-  } catch {
+  } catch (error) {
+    console.error(error);
     return <ErrorSections />;
   }
 }
