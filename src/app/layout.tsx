@@ -19,14 +19,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Front-End Developer`,
+    default: `${SITE.name} — ${SITE.role}`,
     template: `%s — ${SITE.name}`,
   },
   description: SITE.description,
   keywords: [
     SITE.name,
     `${SITE.name} portfolio`,
-    "front-end developer",
+    `${SITE.role}`,
     "React developer",
     "TypeScript",
     "Next.js developer",
@@ -44,9 +44,8 @@ export const metadata: Metadata = {
     locale: SITE.locale,
     url: SITE.url,
     siteName: `${SITE.name} — Portfolio`,
-    title: `${SITE.name} — Front-End Developer`,
-    description:
-      "Front-end developer building clean, responsive, high-performance web interfaces. View selected projects and experience.",
+    title: `${SITE.name} — ${SITE.role}`,
+    description: SITE.description,
     images: [
       {
         url: "/opengraph-image.png",
@@ -58,9 +57,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — Front-End Developer`,
-    description:
-      "Front-end developer building clean, responsive, high-performance web interfaces.",
+    title: `${SITE.name} — ${SITE.role}`,
+    description: SITE.description,
     images: ["/opengraph-image.png"],
   },
   robots: {
@@ -88,7 +86,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen bg-bg font-sans text-text antialiased">
+      <body className="bg-bg text-text min-h-screen font-sans antialiased">
         <main id="main">{children}</main>
       </body>
     </html>

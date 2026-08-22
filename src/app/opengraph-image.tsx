@@ -63,7 +63,7 @@ export default function Image() {
             marginBottom: 48,
           }}
         >
-          Front-End Developer
+          {SITE.role}
         </p>
 
         {/* Bottom accent rule */}

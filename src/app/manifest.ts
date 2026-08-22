@@ -5,8 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${SITE.name} — Portfolio`,
     short_name: "N. Khemthong",
-    description:
-      "Front-end developer Natdanai Khemthong — portfolio of selected projects and experience.",
+    description: SITE.description,
     start_url: "/",
     display: "standalone",
     background_color: "#050505",
