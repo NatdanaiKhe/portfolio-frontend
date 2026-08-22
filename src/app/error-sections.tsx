@@ -17,8 +17,9 @@ export function ErrorSections() {
           Something Went Wrong
         </h1>
         <p className="text-text-muted mt-4 text-sm leading-relaxed">
-          We’re having trouble loading this page right now. Please try again in
-          a moment.
+          We’re having trouble loading this page right now.
+          <br />
+          Please try again in a moment.
         </p>
       </motion.div>
     </div>
