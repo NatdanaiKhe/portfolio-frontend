@@ -1,5 +1,6 @@
 export const SITE = {
   name: "Natdanai Khemthong",
+  role: "Full-Stack Developer",
   shortName: "Natdanai",
   url: process.env.DOMAIN || "https://natdanai.dev",
   locale: "en_US",
