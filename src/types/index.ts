@@ -75,3 +75,68 @@ export type ContactType = {
     };
   }>;
 };
+
+// --- Blog types ---
+
+export type StrapiBlock =
+  | {
+      type: "paragraph";
+      children: { text: string; bold?: boolean; italic?: boolean }[];
+    }
+  | {
+      type: "heading";
+      level: 1 | 2 | 3 | 4 | 5 | 6;
+      children: { text: string }[];
+    }
+  | {
+      type: "list";
+      format: "ordered" | "unordered";
+      children: StrapiBlock[];
+    }
+  | {
+      type: "code";
+      children: { text: string }[];
+    }
+  | {
+      type: "quote";
+      children: { text: string }[];
+    }
+  | {
+      type: "image";
+      image: { url: string; alt?: string; width?: number; height?: number };
+      children: never[];
+    }
+  | {
+      type: "link";
+      url: string;
+      children: { text: string }[];
+    };
+
+export type Tag = { id: number; name: string };
+
+export type BlogCategory = {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string;
+  description?: string;
+};
+
+export type BlogPost = {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  excerpt?: string;
+  content: StrapiBlock[];
+  cover_image?: {
+    url: string;
+    alternativeText?: string;
+    width?: number;
+    height?: number;
+  } | null;
+  category?: BlogCategory | null;
+  tags?: Tag[];
+  view_count: number;
+  publishedAt: string;
+};

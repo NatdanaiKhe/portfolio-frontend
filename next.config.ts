@@ -4,6 +4,7 @@ const cmsUrl = process.env.CMS_URL ?? "http://localhost:1337";
 const cmsHostname = new URL(cmsUrl).hostname;
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   reactStrictMode: true,
   images: {
     remotePatterns: [
