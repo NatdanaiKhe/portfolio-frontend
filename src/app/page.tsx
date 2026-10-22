@@ -1,14 +1,21 @@
-import { getAllPageData } from "@/lib/strapi";
+import { getAllPageData, getLatestBlogPosts } from "@/lib/strapi";
 import { PageSections } from "./page-sections";
 import { ErrorSections } from "./error-sections";
 import { SITE } from "@/site.config";
+import type { BlogPost } from "@/types";
 
 // Regenerate every hour
 export const revalidate = 3600;
 
 export default async function Page() {
   try {
-    const data = await getAllPageData();
+    const [data, latestPosts] = await Promise.all([
+      getAllPageData(),
+      getLatestBlogPosts(3).catch((error) => {
+        console.error("Failed to fetch latest blog posts:", error);
+        return [] as BlogPost[];
+      }),
+    ]);
     const techNames = data.techStack.map((t) => t.name).filter(Boolean);
     const socialUrls = data.contact.socials
       .map((s) => s.link)
@@ -30,7 +37,7 @@ export default async function Page() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-        <PageSections data={data} />
+        <PageSections data={data} latestPosts={latestPosts} />
       </>
     );
   } catch (error) {
