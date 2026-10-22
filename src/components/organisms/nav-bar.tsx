@@ -4,22 +4,28 @@ import { useState, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { NavLink } from "@/components/atoms/nav-link";
 
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
-];
+interface NavBarProps {
+  showBlog?: boolean;
+}
 
-export function NavBar() {
+export function NavBar({ showBlog = false }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const reduce = useReducedMotion();
 
   const toggle = useCallback(() => setIsOpen((v) => !v), []);
   const close = useCallback(() => setIsOpen(false), []);
+
+  const navItems: Array<{ label: string; href: string; isRoute?: boolean }> = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#experience" },
+    ...(showBlog ? [{ label: "Blog", href: "/blog", isRoute: true }] : []),
+    { label: "Contact", href: "#contact" },
+  ];
 
   return (
     <>
@@ -44,11 +50,21 @@ export function NavBar() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <NavLink key={item.href} href={item.href} className="px-3 py-1.5">
-              {item.label}
-            </NavLink>
-          ))}
+          {navItems.map((item) =>
+            item.isRoute ? (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="relative px-3 py-1.5 text-sm font-medium tracking-wide text-text-muted transition-colors hover:text-text"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <NavLink key={item.href} href={item.href} className="px-3 py-1.5">
+                {item.label}
+              </NavLink>
+            ),
+          )}
         </div>
 
         {/* Mobile hamburger */}
@@ -78,24 +94,42 @@ export function NavBar() {
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
             onClick={close}
           >
-            {navItems.map((item, i) => (
-              <motion.a
-                key={item.href}
-                href={item.href}
-                onClick={close}
-                className="text-text-muted hover:text-text text-2xl font-semibold tracking-tight transition-colors"
-                initial={reduce ? false : { opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 24 }}
-                transition={{
+            {navItems.map((item, i) => {
+              const sharedClasses =
+                "text-text-muted hover:text-text text-2xl font-semibold tracking-tight transition-colors";
+              const motionProps = {
+                initial: reduce ? false : { opacity: 0, y: 24 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 24 },
+                transition: {
                   delay: i * 0.08,
                   duration: 0.5,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                {item.label}
-              </motion.a>
-            ))}
+                  ease: [0.16, 1, 0.3, 1] as const,
+                },
+              };
+
+              return item.isRoute ? (
+                <motion.div key={item.href} {...motionProps}>
+                  <Link
+                    href={item.href}
+                    onClick={close}
+                    className={sharedClasses}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  onClick={close}
+                  className={sharedClasses}
+                  {...motionProps}
+                >
+                  {item.label}
+                </motion.a>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
