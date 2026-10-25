@@ -63,6 +63,13 @@ export type ExperienceType = {
   startDate: string;
   endDate: string;
   detail: string;
+  company_icon?: {
+    id?: number;
+    name?: string;
+    url: string;
+    alternativeText?: string | null;
+    formats?: Record<string, { url: string }> | null;
+  } | string | null;
 };
 
 export type ContactType = {
