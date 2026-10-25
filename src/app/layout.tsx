@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.role}`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name} - ${SITE.role}`,
+    template: `%s - ${SITE.name}`,
   },
   description: SITE.description,
   keywords: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
   publisher: SITE.name,
-  applicationName: `${SITE.name} — Portfolio`,
+  applicationName: `${SITE.name} - Portfolio`,
   category: "Portfolio",
   alternates: {
     canonical: "/",
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: SITE.locale,
     url: SITE.url,
-    siteName: `${SITE.name} — Portfolio`,
-    title: `${SITE.name} — ${SITE.role}`,
+    siteName: `${SITE.name} - Portfolio`,
+    title: `${SITE.name} - ${SITE.role}`,
     description: SITE.description,
     images: [
       {
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.role}`,
+    title: `${SITE.name} - ${SITE.role}`,
     description: SITE.description,
     images: ["/opengraph-image.png"],
   },

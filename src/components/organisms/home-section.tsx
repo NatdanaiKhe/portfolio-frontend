@@ -3,31 +3,30 @@
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { Circle } from "lucide-react";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 import type { HomeData } from "@/types";
 import { CTAButton } from "@/components/atoms/cta-button";
 import { getCmsImageUrl } from "@/lib/media-url";
+import { extractTextFromBlocks } from "@/lib/utils";
 
-export function HomeSection({ homeData }: { homeData: HomeData }) {
+export interface HomeSectionProps {
+  homeData: HomeData;
+}
+
+export function HomeSection({ homeData }: HomeSectionProps) {
   const reduce = useReducedMotion();
 
   return (
     <section
       id="home"
       aria-labelledby="home-title"
-      className="flex min-h-[100dvh] w-full flex-col items-center justify-center gap-12 px-6 pt-24 md:flex-row md:gap-16 md:px-12 lg:gap-24 lg:px-24"
+      className="flex min-h-[100dvh] w-full flex-col items-center justify-center px-6 pt-20 pb-16 md:px-12 lg:px-24"
     >
       <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center justify-center gap-12 md:flex-row md:gap-16 lg:gap-24">
-        {/* Text block */}
         <div className="flex max-w-lg flex-col items-start">
-          <motion.p
-            className="border-text/[0.06] bg-text/[0.03] text-text-muted mb-3 inline-block rounded-full border px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase"
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Portfolio
-          </motion.p>
-
           <motion.h1
             id="home-title"
             className="text-text text-4xl leading-[1.1] font-bold tracking-tighter md:text-5xl lg:text-6xl"
@@ -37,9 +36,30 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            Software
-            <br />
-            Developer
+            {Array.isArray(homeData.role) ? (
+              <BlocksRenderer
+                content={homeData.role as unknown as BlocksContent}
+                blocks={{
+                  paragraph: ({ children }) => (
+                    <span className="block">{children}</span>
+                  ),
+                  heading: ({ children }) => (
+                    <span className="block">{children}</span>
+                  ),
+                }}
+              />
+            ) : typeof homeData.role === "string" ? (
+              homeData.role.split("\n").map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))
+            ) : (
+              <>
+                <span className="block">Software</span>
+                <span className="block">Developer</span>
+              </>
+            )}
           </motion.h1>
 
           <motion.p
@@ -48,8 +68,11 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            Full Stack Developer specializing in React, Next.js & React Native
-            Building scalable web and mobile products from frontend to backend
+            {typeof homeData.hero_text === "string"
+              ? homeData.hero_text
+              : Array.isArray(homeData.hero_text)
+                ? extractTextFromBlocks(homeData.hero_text)
+                : ""}
           </motion.p>
 
           <motion.div
@@ -62,19 +85,17 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
               View Projects
             </CTAButton>
             <CTAButton href="#contact" variant="secondary" showArrow={false}>
-              Get in Touch
+              Get in touch
             </CTAButton>
           </motion.div>
         </div>
 
-        {/* Image block */}
         <motion.div
           className="relative"
           initial={reduce ? false : { opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Double-Bezel wrapper */}
           <div className="border-text/[0.06] bg-text/[0.02] rounded-[2rem] border p-1.5 shadow-[inset_0_1px_0_var(--surface-highlight)]">
             <div className="relative overflow-hidden rounded-[calc(2rem-0.375rem)]">
               <Image
@@ -83,7 +104,7 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
                     ? getCmsImageUrl(homeData.profile_image.url)
                     : "/logo.svg"
                 }
-                alt="Natdanai Khemthong — Full-Stack Developer profile photo"
+                alt="Natdanai Khemthong - Full-Stack Developer profile photo"
                 width={400}
                 height={400}
                 className="h-64 w-64 object-cover md:h-80 md:w-80"
@@ -93,7 +114,6 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
             </div>
           </div>
 
-          {/* Availability badge */}
           <motion.div
             className="border-text/[0.08] bg-bg-subtle absolute -right-2 -bottom-2 flex items-center gap-2 rounded-full border px-4 py-2 shadow-lg"
             initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -116,6 +136,37 @@ export function HomeSection({ homeData }: { homeData: HomeData }) {
           </motion.div>
         </motion.div>
       </div>
+
+      <motion.div
+        className="mt-8 flex w-full max-w-4xl flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-center sm:flex-row sm:text-left"
+        initial={reduce ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <span className="text-text-faint text-xs font-medium">
+          Previously building with teams at
+        </span>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <a
+            href="#experience"
+            className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
+          >
+            MTEL Thailand
+          </a>
+          <a
+            href="#experience"
+            className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
+          >
+            Brilliant & Million
+          </a>
+          <a
+            href="#experience"
+            className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
+          >
+            Ai9 Co., Ltd
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
 }

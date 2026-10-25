@@ -19,6 +19,8 @@ export type HomeData = {
       small?: { url: string };
     };
   };
+  hero_text: string;
+  role: StrapiBlock[] | string;
 };
 
 export type AboutType = {
@@ -54,13 +56,14 @@ export type ProjectType = {
 };
 
 export type ExperienceType = {
+  id?: number;
   exp_id: number;
   title: string;
   company: string;
   startDate: string;
   endDate: string;
   detail: string;
-}
+};
 
 export type ContactType = {
   email: string;

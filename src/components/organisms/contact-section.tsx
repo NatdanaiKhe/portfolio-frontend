@@ -1,98 +1,93 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import type { ContactType } from "@/types";
-import { SectionHeading } from "@/components/atoms/section-heading";
 import { SocialLink } from "@/components/molecules/social-link";
 
-export function ContactSection({ contact }: { contact: ContactType }) {
+export interface ContactSectionProps {
+  contact: ContactType;
+}
+
+export function ContactSection({ contact }: ContactSectionProps) {
   const reduce = useReducedMotion();
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="px-6 py-32 md:px-12 lg:px-24">
-      <div className="mx-auto max-w-[1280px]">
-        <SectionHeading id="contact-title">Get in Touch</SectionHeading>
-
-        <motion.p
-          className="mt-4 max-w-lg text-sm leading-relaxed text-text-faint"
-          initial={reduce ? false : { opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Have a project in mind or want to discuss potential opportunities?
-          I&apos;d love to hear from you.
-        </motion.p>
-
-        {/* Contact info cards */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Email */}
-          <motion.div
-            className="rounded-[1.25rem] border border-text/[0.05] bg-bg-elevated p-[1px] shadow-[inset_0_1px_0_var(--surface-highlight)]"
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    <section
+      id="contact"
+      aria-labelledby="contact-title"
+      className="px-6 py-24 sm:py-32 md:px-12 lg:px-24"
+    >
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-10 sm:mb-14">
+          <h2
+            id="contact-title"
+            className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl"
           >
-            <div className="rounded-[calc(1.25rem-1px)] bg-bg-subtle p-6">
-              <Mail className="mb-3 h-5 w-5 text-accent" />
-              <p className="text-xs font-medium tracking-wider text-text-faint uppercase">
-                Email
-              </p>
-              <a
-                href={`mailto:${contact.email}`}
-                className="mt-1 block text-sm font-medium text-text transition-colors hover:text-accent"
-              >
-                {contact.email}
-              </a>
+            Get in Touch
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted sm:text-base">
+            Have an open role, an interesting project, or just want to connect? My inbox is always open.
+          </p>
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            className="rounded-2xl border border-white/[0.06] bg-bg-elevated/70 p-5 sm:p-6 shadow-[inset_0_1px_0_var(--surface-highlight)] transition-colors duration-300 hover:border-white/12"
+            initial={reduce ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "100px" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-accent mb-4">
+              <Mail className="h-5 w-5" />
             </div>
+            <p className="text-xs font-semibold tracking-wider text-text-faint uppercase">
+              Email
+            </p>
+            <a
+              href={`mailto:${contact.email}`}
+              className="mt-1 block text-sm font-medium text-text transition-colors hover:text-accent truncate"
+            >
+              {contact.email}
+            </a>
           </motion.div>
 
-          {/* Location */}
           <motion.div
-            className="rounded-[1.25rem] border border-text/[0.05] bg-bg-elevated p-[1px] shadow-[inset_0_1px_0_var(--surface-highlight)]"
-            initial={reduce ? false : { opacity: 0, y: 20 }}
+            className="rounded-2xl border border-white/[0.06] bg-bg-elevated/70 p-5 sm:p-6 shadow-[inset_0_1px_0_var(--surface-highlight)] transition-colors duration-300 hover:border-white/12"
+            initial={reduce ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
+            viewport={{ once: true, margin: "100px" }}
+            transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="rounded-[calc(1.25rem-1px)] bg-bg-subtle p-6">
-              <MapPin className="mb-3 h-5 w-5 text-accent" />
-              <p className="text-xs font-medium tracking-wider text-text-faint uppercase">
-                Based in
-              </p>
-              <p className="mt-1 text-sm font-medium text-text">
-                {contact.location}
-              </p>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-accent mb-4">
+              <MapPin className="h-5 w-5" />
             </div>
+            <p className="text-xs font-semibold tracking-wider text-text-faint uppercase">
+              Location
+            </p>
+            <p className="mt-1 text-sm font-medium text-text">
+              {contact.location}
+            </p>
           </motion.div>
 
-          {/* Social links */}
           <motion.div
-            className="rounded-[1.25rem] border border-text/[0.05] bg-bg-elevated p-[1px] shadow-[inset_0_1px_0_var(--surface-highlight)] sm:col-span-2 lg:col-span-1"
-            initial={reduce ? false : { opacity: 0, y: 20 }}
+            className="rounded-2xl border border-white/[0.06] bg-bg-elevated/70 p-5 sm:p-6 shadow-[inset_0_1px_0_var(--surface-highlight)] transition-colors duration-300 hover:border-white/12 sm:col-span-2 lg:col-span-1"
+            initial={reduce ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.2,
-              ease: [0.16, 1, 0.3, 1],
-            }}
+            viewport={{ once: true, margin: "100px" }}
+            transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="rounded-[calc(1.25rem-1px)] bg-bg-subtle p-6">
-              <p className="mb-4 text-xs font-medium tracking-wider text-text-faint uppercase">
-                Connect
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {contact.socials.map((social) => (
-                  <SocialLink key={social.name} social={social} />
-                ))}
-              </div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-accent mb-4">
+              <Send className="h-5 w-5" />
+            </div>
+            <p className="mb-3 text-xs font-semibold tracking-wider text-text-faint uppercase">
+              Connect
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {contact.socials.map((social) => (
+                <SocialLink key={social.name} social={social} />
+              ))}
             </div>
           </motion.div>
         </div>

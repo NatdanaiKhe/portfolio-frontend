@@ -8,6 +8,7 @@ import type {
   BlogPost,
   BlogCategory,
 } from "@/types";
+import { extractTextFromBlocks } from "@/lib/utils";
 
 function cmsUrl(): string {
   return (process.env.CMS_URL ?? "http://localhost:1337").replace(/\/+$/, "");
@@ -46,8 +47,29 @@ async function fetchFromCMS<T>(
 // --- Single types ---
 
 export async function getHome(): Promise<HomeData> {
-  const res = await fetchFromCMS<StrapiSingle<HomeData>>("/home?populate=*");
-  return res.data;
+  const res =
+    await fetchFromCMS<StrapiSingle<Record<string, unknown>>>(
+      "/home?populate=*",
+    );
+  const raw = res.data;
+  if (!raw) {
+    throw new Error("CMS returned no data for /home");
+  }
+
+  const hero_text =
+    typeof raw.hero_text === "string"
+      ? raw.hero_text
+      : Array.isArray(raw.hero_text)
+        ? extractTextFromBlocks(
+            raw.hero_text as Parameters<typeof extractTextFromBlocks>[0],
+          ).trim()
+        : "";
+
+  return {
+    ...(raw as unknown as HomeData),
+    hero_text,
+    role: raw.role as HomeData["role"],
+  };
 }
 
 export async function getAbout(): Promise<AboutType> {
