@@ -19,7 +19,7 @@ export function TechStackChip({
       className="group flex flex-col items-center gap-2 rounded-2xl border border-text/[0.04] bg-bg-subtle p-4 shadow-[inset_0_1px_0_var(--surface-highlight)] transition-shadow duration-500 hover:shadow-[inset_0_1px_0_var(--surface-highlight)]"
       initial={reduce ? false : { opacity: 0, y: 16, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, margin: "100px" }}
       transition={{
         duration: 0.5,
         delay: index * 0.04,

@@ -2,15 +2,23 @@
 
 /* Dark-only OLED-black palette */
 :root {
-  --bg: #050505;
-  --bg-elevated: #0a0a0b;
-  --bg-subtle: #111113;
+  --bg: #07080a;
+  --bg-elevated: #0f1115;
+  --bg-subtle: #16181e;
   --text: #fafafa;
   --text-muted: #a1a1aa;
   --text-faint: #71717a;
   --accent: #6366f1;
   --accent-foreground: #fafafa;
-  --surface-highlight: rgba(255, 255, 255, 0.04);
+  --surface-highlight: rgba(255, 255, 255, 0.05);
+
+  --color-accent-teal: #14b8a6;
+  --color-accent-green: #22c55e;
+  --color-accent-indigo: #6366f1;
+  --color-accent-clay: #f97316;
+  --color-accent-ochre: #eab308;
+  --color-accent-plum: #a855f7;
+  --color-accent-sky: #38bdf8;
 }
 
 @theme inline {

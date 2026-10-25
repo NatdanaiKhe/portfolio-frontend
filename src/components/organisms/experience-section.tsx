@@ -1,42 +1,46 @@
 "use client";
 
-import type { ExperienceType } from "@/types";
-import { SectionHeading } from "@/components/atoms/section-heading";
 import { ExperienceTimelineItem } from "@/components/molecules/experience-item";
+import type { ExperienceSectionProps } from "@/types/experience";
 
-export function ExperienceSection({
-  experience,
-}: {
-  experience: ExperienceType[];
-}) {
+export function ExperienceSection({ experience }: ExperienceSectionProps) {
   const sorted = [...experience].sort((a, b) => b.exp_id - a.exp_id);
 
   return (
     <section
       id="experience"
       aria-labelledby="experience-title"
-      className="px-6 py-32 md:px-12 lg:px-24"
+      className="px-6 py-24 sm:py-32 md:px-12 lg:px-24"
     >
-      <div className="mx-auto max-w-[1280px]">
-        <div className="grid gap-12 md:grid-cols-12">
-          {/* Left: sticky heading */}
-          <div className="md:col-span-4">
-            <div className="md:sticky md:top-32">
-              <SectionHeading id="experience-title">Experience</SectionHeading>
-            </div>
-          </div>
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-12 sm:mb-16">
+          <h2
+            id="experience-title"
+            className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl"
+          >
+            Experience
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted sm:text-base">
+            Professional trajectory building web platforms, mobile applications, and reliable digital systems.
+          </p>
+        </div>
 
-          {/* Right: timeline */}
-          <div className="md:col-span-8">
-            <div className="relative space-y-14">
-              {/* Timeline continuous line */}
-              <div className="from-accent/40 via-text/[0.06] absolute top-0 bottom-0 left-[7px] w-px bg-gradient-to-b to-transparent" />
+        <div className="relative pl-7 sm:pl-9">
+          <div
+            className="absolute top-4 bottom-4 left-[3px] sm:left-[5px] w-px bg-gradient-to-b from-accent/50 via-white/10 to-transparent"
+            aria-hidden="true"
+          />
 
-              {sorted.map((exp, i) => (
-                <ExperienceTimelineItem key={exp.exp_id} exp={exp} index={i} />
-              ))}
-            </div>
-          </div>
+          <ol className="space-y-6 sm:space-y-8">
+            {sorted.map((exp, i) => (
+              <ExperienceTimelineItem
+                key={exp.exp_id || i}
+                exp={exp}
+                index={i}
+                defaultOpen={true}
+              />
+            ))}
+          </ol>
         </div>
       </div>
     </section>

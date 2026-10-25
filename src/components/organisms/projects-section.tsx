@@ -1,33 +1,33 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import type { ProjectType } from "@/types";
-import { SectionEyebrow } from "@/components/atoms/section-eyebrow";
-import { SectionHeading } from "@/components/atoms/section-heading";
 import { ProjectCard } from "@/components/molecules/project-card";
 
-export function ProjectsSection({ projects }: { projects: ProjectType[] }) {
-  const reduce = useReducedMotion();
+export interface ProjectsSectionProps {
+  projects: ProjectType[];
+}
 
+export function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
-    <section id="projects" aria-labelledby="projects-title" className="px-6 py-32 md:px-12 lg:px-24">
-      <div className="mx-auto max-w-[1280px]">
-        <SectionEyebrow>Selected Work</SectionEyebrow>
-        <SectionHeading id="projects-title">Projects</SectionHeading>
+    <section
+      id="projects"
+      aria-labelledby="projects-title"
+      className="px-6 py-24 sm:py-32 md:px-12 lg:px-24"
+    >
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-10 sm:mb-14">
+          <h2
+            id="projects-title"
+            className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl"
+          >
+            Selected Projects
+          </h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted sm:text-base">
+            Featured products, open source tooling, and applications crafted with modern tech stacks.
+          </p>
+        </div>
 
-        <motion.p
-          className="mt-4 max-w-lg text-sm leading-relaxed text-text-faint"
-          initial={reduce ? false : { opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          A selection of recent work. Each project brought unique challenges
-          that helped sharpen my craft.
-        </motion.p>
-
-        {/* Asymmetric bento project grid */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <ProjectCard key={project.name} project={project} index={i} />
           ))}

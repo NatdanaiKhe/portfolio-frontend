@@ -17,6 +17,7 @@ import { ExperienceSection } from "@/components/organisms/experience-section";
 import { ContactSection } from "@/components/organisms/contact-section";
 import { LatestBlogsSection } from "@/components/organisms/latest-blogs-section";
 import { Footer } from "@/components/organisms/footer-section";
+import { TechStackProvider } from "@/context/tech-stack-context";
 
 interface PageData {
   home: HomeData;
@@ -37,15 +38,17 @@ export function PageSections({
   const hasBlogs = Boolean(latestPosts && latestPosts.length > 0);
 
   return (
-    <div className="bg-bg relative">
-      <NavBar showBlog={hasBlogs} />
-      <HomeSection homeData={data.home} />
-      <AboutSection about={data.about} techStacks={data.techStack} />
-      <ProjectsSection projects={data.projects} />
-      <ExperienceSection experience={data.experience} />
-      <ContactSection contact={data.contact} />
-      {hasBlogs && <LatestBlogsSection posts={latestPosts ?? []} />}
-      <Footer />
-    </div>
+    <TechStackProvider stacks={data.techStack}>
+      <div className="bg-bg relative">
+        <NavBar showBlog={hasBlogs} />
+        <HomeSection homeData={data.home} />
+        <AboutSection about={data.about} techStacks={data.techStack} />
+        <ProjectsSection projects={data.projects} />
+        <ExperienceSection experience={data.experience} />
+        <ContactSection contact={data.contact} />
+        {hasBlogs && <LatestBlogsSection posts={latestPosts ?? []} />}
+        <Footer />
+      </div>
+    </TechStackProvider>
   );
 }
