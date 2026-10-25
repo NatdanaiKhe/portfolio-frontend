@@ -1,17 +1,25 @@
 "use client";
 
 import { useId } from "react";
-import { ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { ChevronDown, Building2 } from "lucide-react";
 import { RichExperienceText } from "@/components/atoms/rich-experience-text";
 import { InlineSkillTag } from "@/components/atoms/inline-skill-tag";
-import { getCompanyCharm, getDuration, extractSkills } from "@/lib/experience-utils";
+import { getDuration, extractSkills } from "@/lib/experience-utils";
+import { getCmsImageUrl } from "@/lib/media-url";
 import type { ExperienceTimelineItemProps } from "@/types/experience";
 
 export function ExperienceTimelineItem({
   exp,
   defaultOpen = true,
+  company_icon,
 }: ExperienceTimelineItemProps) {
-  const charm = getCompanyCharm(exp.company);
+  const rawIcon =
+    company_icon ||
+    (typeof exp.company_icon === "string"
+      ? exp.company_icon
+      : exp.company_icon?.url);
+  const iconUrl = rawIcon ? getCmsImageUrl(rawIcon) : null;
   const duration = getDuration(exp.startDate, exp.endDate);
   const points = exp.detail
     .split("\n")
@@ -33,10 +41,24 @@ export function ExperienceTimelineItem({
       >
         <summary className="flex cursor-pointer list-none items-start justify-between gap-4 select-none">
           <div className="flex items-start gap-3.5 sm:gap-4">
-            <div
-              className={`flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl border bg-gradient-to-br ${charm.bgGradient} ${charm.borderColor} ${charm.textColor} font-bold text-xs sm:text-sm tracking-tight shadow-sm transition-transform duration-300 group-hover/disclosure:scale-105`}
-            >
-              {charm.monogram}
+            <div className="relative flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-1.5 shadow-sm transition-transform duration-300 group-hover/disclosure:scale-105">
+              {iconUrl ? (
+                <Image
+                  src={iconUrl}
+                  alt={
+                    typeof exp.company_icon === "object" &&
+                    exp.company_icon?.alternativeText
+                      ? exp.company_icon.alternativeText
+                      : `${exp.company} icon`
+                  }
+                  width={48}
+                  height={48}
+                  className="h-full w-full rounded-lg object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <Building2 className="h-5 w-5 text-text-muted" aria-hidden="true" />
+              )}
             </div>
 
             <div className="min-w-0 flex-1">
