@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/site.config";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { CookieBanner } from "@/components/molecules/cookie-banner";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -87,7 +89,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <body className="bg-bg text-text min-h-screen font-sans antialiased">
+        <GoogleAnalytics />
         <main id="main">{children}</main>
+        <CookieBanner />
       </body>
     </html>
   );
