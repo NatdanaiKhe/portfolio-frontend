@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { openCookieBanner } from "@/lib/gtag";
 
 const footerLinks = [
   { label: "Home", href: "#home" },
@@ -45,6 +46,21 @@ export function Footer() {
               {link.label}
             </motion.a>
           ))}
+          <motion.button
+            type="button"
+            onClick={openCookieBanner}
+            className="text-xs text-text-faint transition-colors hover:text-text cursor-pointer"
+            initial={reduce ? false : { opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.4,
+              delay: footerLinks.length * 0.05,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+            Cookie Settings
+          </motion.button>
         </nav>
       </div>
     </footer>
