@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/site.config";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { CookieBanner } from "@/components/molecules/cookie-banner";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -19,8 +21,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.role}`,
-    template: `%s — ${SITE.name}`,
+    default: `${SITE.name} - ${SITE.role}`,
+    template: `%s - ${SITE.name}`,
   },
   description: SITE.description,
   keywords: [
@@ -34,17 +36,27 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
   publisher: SITE.name,
-  applicationName: `${SITE.name} — Portfolio`,
+  applicationName: `${SITE.name} - Portfolio`,
   category: "Portfolio",
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: [
+      {
+        url: "/logo.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
   },
   openGraph: {
     type: "website",
     locale: SITE.locale,
     url: SITE.url,
-    siteName: `${SITE.name} — Portfolio`,
-    title: `${SITE.name} — ${SITE.role}`,
+    siteName: `${SITE.name} - Portfolio`,
+    title: `${SITE.name} - ${SITE.role}`,
     description: SITE.description,
     images: [
       {
@@ -57,7 +69,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.role}`,
+    title: `${SITE.name} - ${SITE.role}`,
     description: SITE.description,
     images: ["/opengraph-image.png"],
   },
@@ -87,7 +99,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <body className="bg-bg text-text min-h-screen font-sans antialiased">
+        <GoogleAnalytics />
         <main id="main">{children}</main>
+        <CookieBanner />
       </body>
     </html>
   );

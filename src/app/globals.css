@@ -2,15 +2,23 @@
 
 /* Dark-only OLED-black palette */
 :root {
-  --bg: #050505;
-  --bg-elevated: #0a0a0b;
-  --bg-subtle: #111113;
+  --bg: #07080a;
+  --bg-elevated: #0f1115;
+  --bg-subtle: #16181e;
   --text: #fafafa;
   --text-muted: #a1a1aa;
-  --text-faint: #71717a;
-  --accent: #6366f1;
+  --text-faint: #94949e;
+  --accent: #5450e8;
   --accent-foreground: #fafafa;
-  --surface-highlight: rgba(255, 255, 255, 0.04);
+  --surface-highlight: rgba(255, 255, 255, 0.05);
+
+  --color-accent-teal: #14b8a6;
+  --color-accent-green: #22c55e;
+  --color-accent-indigo: #5450e8;
+  --color-accent-clay: #f97316;
+  --color-accent-ochre: #eab308;
+  --color-accent-plum: #a855f7;
+  --color-accent-sky: #38bdf8;
 }
 
 @theme inline {
@@ -23,8 +31,8 @@
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-foreground);
   --color-surface-highlight: var(--surface-highlight);
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
   --radius: 0.75rem;
 }
 
