@@ -32,6 +32,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           href={project.demo || project.repository}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`View project ${project.name}`}
           className="relative block aspect-[16/9] w-full overflow-hidden bg-bg-subtle"
         >
           <Image
@@ -39,6 +40,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             alt={project.name}
             width={640}
             height={360}
+            sizes="(max-width: 640px) 360px, (max-width: 1024px) 50vw, 320px"
             className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
             referrerPolicy="no-referrer"
           />
@@ -57,9 +59,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
           <div className="mt-auto pt-5 flex flex-col gap-3.5">
             <div className="flex flex-wrap gap-1.5">
-              {project.stacks.map((stack) => (
-                <InlineSkillTag key={stack.id} name={stack.name} />
-              ))}
+              {project.stacks
+                ?.filter((stack) => Boolean(stack && stack.name))
+                .map((stack) => (
+                  <InlineSkillTag key={stack.id} name={stack.name} />
+                ))}
             </div>
 
             <div className="flex items-center gap-3 pt-1 border-t border-white/[0.04]">
@@ -68,6 +72,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.repository}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View source code for ${project.name}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted transition-colors duration-200 hover:text-text"
                 >
                   <Github className="h-3.5 w-3.5" />
@@ -79,6 +84,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`View live demo for ${project.name}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline transition-colors duration-200"
                 >
                   <ExternalLink className="h-3.5 w-3.5" />

@@ -21,12 +21,19 @@ export function ExperienceTimelineItem({
       : exp.company_icon?.url);
   const iconUrl = rawIcon ? getCmsImageUrl(rawIcon) : null;
   const duration = getDuration(exp.startDate, exp.endDate);
-  const points = exp.detail
+  const points = (exp.detail ?? "")
     .split("\n")
     .map((p) => p.trim())
     .filter(Boolean);
-  const detectedSkills = extractSkills(exp.detail);
+  const detectedSkills = exp.detail ? extractSkills(exp.detail) : [];
   const detailsId = useId();
+
+  const formattedDateRange = [
+    exp.startDate?.trim(),
+    exp.endDate ? exp.endDate.trim() : "Present",
+  ]
+    .filter(Boolean)
+    .join(" - ");
 
   return (
     <li className="relative group">
@@ -79,7 +86,7 @@ export function ExperienceTimelineItem({
               </p>
 
               <p className="mt-1 text-xs text-text-faint">
-                {exp.startDate.trim()} - {exp.endDate.trim()}
+                {formattedDateRange}
               </p>
             </div>
           </div>

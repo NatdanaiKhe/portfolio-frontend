@@ -16,10 +16,11 @@ export default async function Page() {
         return [] as BlogPost[];
       }),
     ]);
-    const techNames = data.techStack.map((t) => t.name).filter(Boolean);
-    const socialUrls = data.contact.socials
+    const techNames =
+      data.techStack?.map((t) => t.name).filter(Boolean) ?? [];
+    const socialUrls = (data.contact?.socials ?? [])
       .map((s) => s.link)
-      .filter((url): url is string => /^https?:\/\//.test(url));
+      .filter((url): url is string => Boolean(url) && /^https?:\/\//.test(url));
 
     const personSchema = {
       "@context": "https://schema.org",

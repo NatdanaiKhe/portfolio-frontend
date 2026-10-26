@@ -39,7 +39,7 @@ export function CookieBanner() {
     if (stored === null) {
       timer = setTimeout(() => {
         setIsOpen(true);
-      }, 750);
+      }, 1500);
     }
 
     const handleOpen = () => {
