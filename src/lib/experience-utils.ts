@@ -40,9 +40,15 @@ export function getCompanyCharm(company: string): CompanyCharm {
   };
 }
 
-export function getDuration(startStr: string, endStr: string): string {
+export function getDuration(
+  startStr?: string | null,
+  endStr?: string | null,
+): string {
   try {
-    const parseMonthYear = (s: string) => {
+    if (!startStr) return "";
+
+    const parseMonthYear = (s?: string | null) => {
+      if (!s) return null;
       const trimmed = s.trim().toLowerCase();
       if (trimmed === "present") return new Date();
       const parts = trimmed.split(/\s+/);
@@ -58,7 +64,7 @@ export function getDuration(startStr: string, endStr: string): string {
     };
 
     const d1 = parseMonthYear(startStr);
-    const d2 = parseMonthYear(endStr);
+    const d2 = parseMonthYear(endStr || "Present");
     if (!d1 || !d2) return "";
 
     const months = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth()) + 1;

@@ -1,6 +1,3 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { Circle } from "lucide-react";
 import {
@@ -17,8 +14,6 @@ export interface HomeSectionProps {
 }
 
 export function HomeSection({ homeData }: HomeSectionProps) {
-  const reduce = useReducedMotion();
-
   return (
     <section
       id="home"
@@ -27,14 +22,9 @@ export function HomeSection({ homeData }: HomeSectionProps) {
     >
       <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center justify-center gap-12 md:flex-row md:gap-16 lg:gap-24">
         <div className="flex max-w-lg flex-col items-start">
-          <motion.h1
+          <h1
             id="home-title"
             className="text-text text-4xl leading-[1.1] font-bold tracking-tighter md:text-5xl lg:text-6xl"
-            initial={
-              reduce ? false : { opacity: 0, y: 24, filter: "blur(8px)" }
-            }
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             {Array.isArray(homeData.role) ? (
               <BlocksRenderer
@@ -60,42 +50,27 @@ export function HomeSection({ homeData }: HomeSectionProps) {
                 <span className="block">Developer</span>
               </>
             )}
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            className="text-text-muted mt-6 max-w-md text-base leading-relaxed md:text-lg"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <p className="text-text-muted mt-6 max-w-md text-base leading-relaxed md:text-lg">
             {typeof homeData.hero_text === "string"
               ? homeData.hero_text
               : Array.isArray(homeData.hero_text)
                 ? extractTextFromBlocks(homeData.hero_text)
                 : ""}
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="mt-8 flex items-center gap-4"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="mt-8 flex items-center gap-4">
             <CTAButton href="#projects" variant="default">
               View Projects
             </CTAButton>
             <CTAButton href="#contact" variant="secondary" showArrow={false}>
               Get in touch
             </CTAButton>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          className="relative"
-          initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <div className="relative">
           <div className="border-text/[0.06] bg-text/[0.02] rounded-[2rem] border p-1.5 shadow-[inset_0_1px_0_var(--surface-highlight)]">
             <div className="relative overflow-hidden rounded-[calc(2rem-0.375rem)]">
               <Image
@@ -107,19 +82,16 @@ export function HomeSection({ homeData }: HomeSectionProps) {
                 alt="Natdanai Khemthong - Full-Stack Developer profile photo"
                 width={400}
                 height={400}
+                sizes="(max-width: 768px) 256px, 320px"
                 className="h-64 w-64 object-cover md:h-80 md:w-80"
                 priority
+                fetchPriority="high"
                 referrerPolicy="no-referrer"
               />
             </div>
           </div>
 
-          <motion.div
-            className="border-text/[0.08] bg-bg-subtle absolute -right-2 -bottom-2 flex items-center gap-2 rounded-full border px-4 py-2 shadow-lg"
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
+          <div className="border-text/[0.08] bg-bg-subtle absolute -right-2 -bottom-2 flex items-center gap-2 rounded-full border px-4 py-2 shadow-lg">
             <Circle
               className={`h-2.5 w-2.5 ${
                 homeData.available_status
@@ -133,16 +105,11 @@ export function HomeSection({ homeData }: HomeSectionProps) {
                 ? "Available for work"
                 : "Not available"}
             </span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      <motion.div
-        className="mt-8 flex w-full max-w-4xl flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-center sm:flex-row sm:text-left"
-        initial={reduce ? false : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <div className="mt-8 flex w-full max-w-4xl flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-center sm:flex-row sm:text-left">
         <span className="text-text-faint text-xs font-medium">
           Previously building with teams at
         </span>
@@ -166,7 +133,7 @@ export function HomeSection({ homeData }: HomeSectionProps) {
             Ai9 Co., Ltd
           </a>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

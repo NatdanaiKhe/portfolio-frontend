@@ -6,7 +6,10 @@ const cmsHostname = new URL(cmsUrl).hostname;
 const nextConfig: NextConfig = {
   output: "standalone",
   reactStrictMode: true,
+  compress: true,
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2592000,
     remotePatterns: [
       {
         protocol: "http",
