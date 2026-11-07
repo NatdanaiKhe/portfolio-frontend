@@ -85,7 +85,7 @@ export function ContactSection({ contact }: ContactSectionProps) {
               Connect
             </p>
             <div className="flex flex-wrap gap-2">
-              {contact.socials.map((social) => (
+              {(contact.socials ?? []).map((social) => (
                 <SocialLink key={social.name} social={social} />
               ))}
             </div>

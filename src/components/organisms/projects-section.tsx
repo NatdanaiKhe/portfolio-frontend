@@ -18,12 +18,13 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <div className="mb-10 sm:mb-14">
           <h2
             id="projects-title"
-            className="text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl"
+            className="text-text text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
           >
-            Selected Projects
+            Projects
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-text-muted sm:text-base">
-            Featured products, open source tooling, and applications crafted with modern tech stacks.
+          <p className="text-text-muted mt-3 max-w-xl text-sm leading-relaxed sm:text-base">
+            Featured products, open source tooling, and applications crafted
+            with modern tech stacks.
           </p>
         </div>
 

@@ -29,21 +29,27 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-bg-elevated/70 shadow-[inset_0_1px_0_var(--surface-highlight)] transition-all duration-500 hover:border-white/15 hover:bg-bg-elevated hover:shadow-[inset_0_1px_0_var(--surface-highlight),0_12px_32px_-8px_rgba(0,0,0,0.5)]">
         <a
-          href={project.demo || project.repository}
+          href={project.demo || project.repository || "#"}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`View project ${project.name}`}
           className="relative block aspect-[16/9] w-full overflow-hidden bg-bg-subtle"
         >
-          <Image
-            src={getCmsImageUrl(project.preview_image.url)}
-            alt={project.name}
-            width={640}
-            height={360}
-            sizes="(max-width: 640px) 360px, (max-width: 1024px) 50vw, 320px"
-            className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-            referrerPolicy="no-referrer"
-          />
+          {project.preview_image?.url ? (
+            <Image
+              src={getCmsImageUrl(project.preview_image.url)}
+              alt={project.preview_image.alternativeText || project.name}
+              width={640}
+              height={360}
+              sizes="(max-width: 640px) 360px, (max-width: 1024px) 50vw, 320px"
+              className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-white/[0.02] text-xs text-text-faint">
+              No preview available
+            </div>
+          )}
         </a>
 
         <div className="flex flex-1 flex-col p-5 sm:p-6">
