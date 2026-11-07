@@ -6,6 +6,7 @@ import { Github, ExternalLink } from "lucide-react";
 import type { ProjectType } from "@/types";
 import { InlineSkillTag } from "@/components/atoms/inline-skill-tag";
 import { getCmsImageUrl } from "@/lib/media-url";
+import { sendGAEvent } from "@/lib/gtag";
 
 export interface ProjectCardProps {
   project: ProjectType;
@@ -34,6 +35,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           rel="noopener noreferrer"
           aria-label={`View project ${project.name}`}
           className="relative block aspect-[16/9] w-full overflow-hidden bg-bg-subtle"
+          onClick={() => {
+            sendGAEvent("select_content", {
+              content_type: "project_preview",
+              item_id: project.name,
+              item_name: project.name,
+              destination: project.demo || project.repository,
+            });
+          }}
         >
           <Image
             src={getCmsImageUrl(project.preview_image.url)}
@@ -74,6 +83,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   rel="noopener noreferrer"
                   aria-label={`View source code for ${project.name}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted transition-colors duration-200 hover:text-text"
+                  onClick={() => {
+                    sendGAEvent("select_content", {
+                      content_type: "project_repository",
+                      item_id: project.name,
+                      item_name: project.name,
+                      destination: project.repository,
+                    });
+                  }}
                 >
                   <Github className="h-3.5 w-3.5" />
                   <span>Source</span>
@@ -86,6 +103,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   rel="noopener noreferrer"
                   aria-label={`View live demo for ${project.name}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline transition-colors duration-200"
+                  onClick={() => {
+                    sendGAEvent("select_content", {
+                      content_type: "project_demo",
+                      item_id: project.name,
+                      item_name: project.name,
+                      destination: project.demo,
+                    });
+                  }}
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
                   <span>Live Demo</span>
