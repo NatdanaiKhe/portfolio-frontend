@@ -14,6 +14,8 @@ export const CMS_REVALIDATE_TIME = parseInt(
   process.env.NEXT_PUBLIC_CMS_REVALIDATE_TIME ?? "3600",
 );
 
+export const FILE_REVALIDATE_TIME = 3600;
+
 function cmsUrl(): string {
   return (process.env.CMS_URL ?? "http://localhost:1337").replace(/\/+$/, "");
 }
