@@ -21,6 +21,15 @@ export type HomeData = {
   };
   hero_text: string;
   role: StrapiBlock[] | string;
+  resume?: {
+    id?: number;
+    documentId?: string;
+    url: string;
+    name?: string;
+    ext?: string;
+    mime?: string;
+    size?: number;
+  } | null;
 };
 
 export type AboutType = {
