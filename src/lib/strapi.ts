@@ -7,8 +7,10 @@ import type {
   ExperienceType,
   BlogPost,
   BlogCategory,
+  AppData,
 } from "@/types";
 import { extractTextFromBlocks } from "@/lib/utils";
+import { FALLBACK_APP_DATA } from "@/constants/fallback-data";
 
 function cmsUrl(): string {
   return (process.env.CMS_URL ?? "http://localhost:1337").replace(/\/+$/, "");
@@ -109,18 +111,41 @@ export async function getExperience(): Promise<ExperienceType[]> {
 
 // --- Aggregated (used by page.tsx) ---
 
-export async function getAllPageData() {
-  const [home, about, techStack, projects, experience, contact] =
-    await Promise.all([
-      getHome(),
-      getAbout(),
-      getTechStack(),
-      getProjects(),
-      getExperience(),
-      getContact(),
-    ]);
+export async function getAllPageData(): Promise<AppData> {
+  try {
+    const [home, about, techStack, projects, experience, contact] =
+      await Promise.all([
+        getHome().catch((err) => {
+          console.warn("CMS: getHome failed, using fallback:", err?.message);
+          return FALLBACK_APP_DATA.home;
+        }),
+        getAbout().catch((err) => {
+          console.warn("CMS: getAbout failed, using fallback:", err?.message);
+          return FALLBACK_APP_DATA.about;
+        }),
+        getTechStack().catch((err) => {
+          console.warn("CMS: getTechStack failed, using fallback:", err?.message);
+          return FALLBACK_APP_DATA.techStack;
+        }),
+        getProjects().catch((err) => {
+          console.warn("CMS: getProjects failed, using fallback:", err?.message);
+          return FALLBACK_APP_DATA.projects;
+        }),
+        getExperience().catch((err) => {
+          console.warn("CMS: getExperience failed, using fallback:", err?.message);
+          return FALLBACK_APP_DATA.experience;
+        }),
+        getContact().catch((err) => {
+          console.warn("CMS: getContact failed, using fallback:", err?.message);
+          return FALLBACK_APP_DATA.contact;
+        }),
+      ]);
 
-  return { home, about, techStack, projects, experience, contact };
+    return { home, about, techStack, projects, experience, contact };
+  } catch (error) {
+    console.warn("CMS: getAllPageData failed, serving full fallback data:", error);
+    return FALLBACK_APP_DATA;
+  }
 }
 
 // --- Blog fetchers ---
