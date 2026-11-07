@@ -7,6 +7,7 @@ import type {
   ProjectType,
   ExperienceType,
   ContactType,
+  ExCompany,
 } from "@/types";
 import type { BlogPost } from "@/types";
 import { NavBar } from "@/components/organisms/nav-bar";
@@ -35,13 +36,17 @@ export function PageSections({
   data: PageData;
   latestPosts?: BlogPost[];
 }) {
+  const exCompany: ExCompany[] = [...(data.experience ?? [])]
+    .sort((a, b) => (b.exp_id ?? 0) - (a.exp_id ?? 0))
+    .filter((exp) => Boolean(exp.company))
+    .map(({ exp_id, company }) => ({ exp_id, name: company }));
   const hasBlogs = Boolean(latestPosts && latestPosts.length > 0);
 
   return (
     <TechStackProvider stacks={data.techStack}>
       <div className="bg-bg relative">
         <NavBar showBlog={hasBlogs} />
-        <HomeSection homeData={data.home} />
+        <HomeSection homeData={data.home} exCompany={exCompany} />
         <AboutSection about={data.about} techStacks={data.techStack} />
         <ProjectsSection projects={data.projects} />
         <ExperienceSection experience={data.experience} />

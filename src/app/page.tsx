@@ -27,7 +27,7 @@ export default async function Page() {
       "@type": "Person" as const,
       name: SITE.name,
       url: SITE.url,
-      jobTitle: "Full Stack Developer",
+      jobTitle: SITE.role,
       knowsAbout: techNames,
       sameAs: socialUrls.length > 0 ? socialUrls : undefined,
     };

@@ -1,6 +1,7 @@
 "use client";
 
 import { openCookieBanner } from "@/lib/gtag";
+import { SITE } from "@/site.config";
 
 const footerLinks = [
   { label: "Home", href: "#home" },
@@ -17,7 +18,7 @@ export function Footer() {
     <footer className="border-t border-text/[0.05] px-6 py-12 md:px-12 lg:px-24">
       <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-6 md:flex-row">
         <p className="text-xs text-text-faint">
-          &copy; {year} Natdanai Khemthong. All rights reserved.
+          &copy; {year} {SITE.name}. All rights reserved.
         </p>
 
         <nav aria-label="Footer" className="flex flex-wrap items-center gap-4">

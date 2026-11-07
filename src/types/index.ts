@@ -8,17 +8,17 @@ export type AppData = {
 };
 
 export type HomeData = {
-  id: number;
-  documentId: string;
+  id?: number;
+  documentId?: string;
   updatedAt?: string;
   available_status: boolean;
-  profile_image: {
+  profile_image?: {
+    id?: number;
+    name?: string;
     url: string;
-    formats: {
-      thumbnail?: { url: string };
-      small?: { url: string };
-    };
-  };
+    alternativeText?: string | null;
+    formats?: Record<string, { url: string }> | null;
+  } | null;
   hero_text: string;
   role: StrapiBlock[] | string;
   resume?: {
@@ -33,32 +33,45 @@ export type HomeData = {
 };
 
 export type AboutType = {
-  id: number;
+  id?: number;
+  documentId?: string;
   updatedAt?: string;
   background: string;
   experience: string;
   education: string;
+  skills?: Array<{
+    id?: number;
+    name: string;
+  }>;
 };
 
 export type TechStackType = {
+  id?: number;
+  documentId?: string;
   name: string;
   proficiency_level: string;
-  tech_image: {
-    name: string;
+  tech_image?: {
+    id?: number;
+    name?: string;
     url: string;
-  };
+    alternativeText?: string | null;
+  } | null;
 };
 
 export type ProjectType = {
+  id?: number;
+  documentId?: string;
   name: string;
   description: string;
-  repository: string;
-  demo: string;
-  preview_image: {
-    name: string;
+  repository?: string | null;
+  demo?: string | null;
+  preview_image?: {
+    id?: number;
+    name?: string;
     url: string;
-  };
-  stacks: Array<{
+    alternativeText?: string | null;
+  } | null;
+  stacks?: Array<{
     id: number;
     name: string;
   }>;
@@ -66,32 +79,42 @@ export type ProjectType = {
 
 export type ExperienceType = {
   id?: number;
+  documentId?: string;
   exp_id: number;
   title: string;
   company: string;
   startDate: string;
-  endDate: string;
+  endDate?: string | null;
   detail: string;
-  company_icon?: {
-    id?: number;
-    name?: string;
-    url: string;
-    alternativeText?: string | null;
-    formats?: Record<string, { url: string }> | null;
-  } | string | null;
+  company_icon?:
+    | {
+        id?: number;
+        name?: string;
+        url: string;
+        alternativeText?: string | null;
+        formats?: Record<string, { url: string }> | null;
+      }
+    | string
+    | null;
 };
 
+export type ExCompany = Pick<ExperienceType, "exp_id"> & { name: string };
+
 export type ContactType = {
+  id?: number;
+  documentId?: string;
   email: string;
   location: string;
   socials: Array<{
     id: number;
     name: string;
     link: string;
-    icon: {
-      name: string;
+    icon?: {
+      id?: number;
+      name?: string;
       url: string;
-    };
+      alternativeText?: string | null;
+    } | null;
   }>;
 };
 
