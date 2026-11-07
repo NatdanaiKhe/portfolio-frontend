@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getHome } from "@/lib/strapi";
+import { CMS_REVALIDATE_TIME, getHome } from "@/lib/strapi";
 import { getCmsImageUrl } from "@/lib/media-url";
 import { SITE } from "@/site.config";
 
@@ -23,7 +23,7 @@ export async function GET() {
 
     const upstream = await fetch(fileUrl, {
       headers: fetchHeaders,
-      next: { revalidate: 3600 },
+      next: { revalidate: CMS_REVALIDATE_TIME },
     });
 
     if (!upstream.ok || !upstream.body) {
@@ -46,7 +46,7 @@ export async function GET() {
     );
     responseHeaders.set(
       "Cache-Control",
-      "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400",
+      `public, max-age=3600, s-maxage=${CMS_REVALIDATE_TIME}, stale-while-revalidate=${CMS_REVALIDATE_TIME}`,
     );
 
     const contentLength = upstream.headers.get("content-length");
