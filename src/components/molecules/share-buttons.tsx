@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Link, Check } from "lucide-react";
+import { sendGAEvent } from "@/lib/gtag";
 
 function CopyLinkButton() {
   const [copied, setCopied] = useState(false);
@@ -10,6 +11,10 @@ function CopyLinkButton() {
     try {
       await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
+      sendGAEvent("share", {
+        method: "copy_link",
+        content_type: "blog_post",
+      });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // clipboard unavailable — silently ignore
@@ -56,6 +61,12 @@ export function ShareButtons() {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-sm text-text-faint transition-colors hover:text-text"
         aria-label="Share on X (Twitter)"
+        onClick={() => {
+          sendGAEvent("share", {
+            method: "x_twitter",
+            content_type: "blog_post",
+          });
+        }}
         {...(disabled ? { "aria-disabled": true } : {})}
       >
         <svg
@@ -74,6 +85,12 @@ export function ShareButtons() {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-sm text-text-faint transition-colors hover:text-text"
         aria-label="Share on LinkedIn"
+        onClick={() => {
+          sendGAEvent("share", {
+            method: "linkedin",
+            content_type: "blog_post",
+          });
+        }}
         {...(disabled ? { "aria-disabled": true } : {})}
       >
         <svg

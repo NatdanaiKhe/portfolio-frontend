@@ -9,6 +9,7 @@ import { TableOfContents } from "@/components/molecules/table-of-contents";
 import { ShareButtons } from "@/components/molecules/share-buttons";
 import { PostNavigation } from "@/components/molecules/post-navigation";
 import { RelatedPosts } from "@/components/molecules/related-posts";
+import { ReadingMilestoneTracker } from "@/components/atoms/reading-milestone-tracker";
 
 interface BlogPostSectionProps {
   post: BlogPost;
@@ -25,6 +26,7 @@ export function BlogPostSection({
 }: BlogPostSectionProps) {
   return (
     <article className="reading-bg min-h-screen">
+      <ReadingMilestoneTracker postSlug={post.slug} postTitle={post.title} />
       <div className="mx-auto max-w-[1100px] px-6 pt-32 pb-20 md:px-8">
         {/* Header */}
         <header className="mx-auto mb-10 max-w-[700px]">
