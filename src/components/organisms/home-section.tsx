@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Circle } from "lucide-react";
+import { Circle, FileText } from "lucide-react";
 import {
   BlocksRenderer,
   type BlocksContent,
@@ -8,6 +8,7 @@ import type { HomeData } from "@/types";
 import { CTAButton } from "@/components/atoms/cta-button";
 import { getCmsImageUrl } from "@/lib/media-url";
 import { extractTextFromBlocks } from "@/lib/utils";
+import { SITE } from "@/site.config";
 
 export interface HomeSectionProps {
   homeData: HomeData;
@@ -60,11 +61,20 @@ export function HomeSection({ homeData }: HomeSectionProps) {
                 : ""}
           </p>
 
-          <div className="mt-8 flex items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <CTAButton href="#projects" variant="default">
               View Projects
             </CTAButton>
-            <CTAButton href="#contact" variant="secondary" showArrow={false}>
+            <CTAButton
+              href={SITE.resumeUrl}
+              external
+              variant="secondary"
+              showArrow={false}
+            >
+              <FileText className="mr-1.5 h-4 w-4" />
+              Resume / CV
+            </CTAButton>
+            <CTAButton href="#contact" variant="ghost" showArrow={false}>
               Get in touch
             </CTAButton>
           </div>

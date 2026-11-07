@@ -7,4 +7,5 @@ export const SITE = {
   description:
     "Natdanai Khemthong builds clean, responsive, high-performance web interfaces and end-to-end solutions. View selected projects and experience.",
   ogImageAlt: "Natdanai Khemthong — Developer portfolio card",
+  resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL || "/resume.pdf",
 } as const;
