@@ -1,9 +1,11 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send, Copy, Check } from "lucide-react";
 import type { ContactType } from "@/types";
 import { SocialLink } from "@/components/molecules/social-link";
+import { sendGAEvent } from "@/lib/gtag";
 
 export interface ContactSectionProps {
   contact: ContactType;
@@ -11,6 +13,21 @@ export interface ContactSectionProps {
 
 export function ContactSection({ contact }: ContactSectionProps) {
   const reduce = useReducedMotion();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email);
+      setCopied(true);
+      sendGAEvent("select_content", {
+        content_type: "copy_email",
+        email: contact.email,
+      });
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard unavailable - user can still click mailto
+    }
+  }, [contact.email]);
 
   return (
     <section
@@ -39,8 +56,28 @@ export function ContactSection({ contact }: ContactSectionProps) {
             viewport={{ once: true, margin: "100px" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-accent mb-4">
-              <Mail className="h-5 w-5" />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-accent">
+                <Mail className="h-5 w-5" />
+              </div>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 text-xs font-medium text-text-muted transition-colors hover:border-white/20 hover:bg-white/[0.06] hover:text-text cursor-pointer"
+                aria-label="Copy email address"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5 text-emerald-400" />
+                    <span className="text-emerald-400">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
             </div>
             <p className="text-xs font-semibold tracking-wider text-text-faint uppercase">
               Email
@@ -48,6 +85,12 @@ export function ContactSection({ contact }: ContactSectionProps) {
             <a
               href={`mailto:${contact.email}`}
               className="mt-1 block text-sm font-medium text-text transition-colors hover:text-accent truncate"
+              onClick={() => {
+                sendGAEvent("select_content", {
+                  content_type: "mailto_click",
+                  destination: `mailto:${contact.email}`,
+                });
+              }}
             >
               {contact.email}
             </a>
