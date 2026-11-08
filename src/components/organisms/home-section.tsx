@@ -1,19 +1,21 @@
 import Image from "next/image";
-import { Circle } from "lucide-react";
+import { Circle, FileText } from "lucide-react";
 import {
   BlocksRenderer,
   type BlocksContent,
 } from "@strapi/blocks-react-renderer";
-import type { HomeData } from "@/types";
+import type { ExCompany, HomeData } from "@/types";
 import { CTAButton } from "@/components/atoms/cta-button";
 import { getCmsImageUrl } from "@/lib/media-url";
 import { extractTextFromBlocks } from "@/lib/utils";
+import { SITE } from "@/site.config";
 
 export interface HomeSectionProps {
   homeData: HomeData;
+  exCompany: ExCompany[];
 }
 
-export function HomeSection({ homeData }: HomeSectionProps) {
+export function HomeSection({ homeData, exCompany }: HomeSectionProps) {
   return (
     <section
       id="home"
@@ -46,8 +48,7 @@ export function HomeSection({ homeData }: HomeSectionProps) {
               ))
             ) : (
               <>
-                <span className="block">Software</span>
-                <span className="block">Developer</span>
+                <span className="block">{homeData.role}</span>
               </>
             )}
           </h1>
@@ -60,11 +61,20 @@ export function HomeSection({ homeData }: HomeSectionProps) {
                 : ""}
           </p>
 
-          <div className="mt-8 flex items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <CTAButton href="#projects" variant="default">
               View Projects
             </CTAButton>
-            <CTAButton href="#contact" variant="secondary" showArrow={false}>
+            <CTAButton
+              href={SITE.resumeUrl}
+              external
+              variant="secondary"
+              showArrow={false}
+            >
+              <FileText className="mr-1.5 h-4 w-4" />
+              Resume / CV
+            </CTAButton>
+            <CTAButton href="#contact" variant="ghost" showArrow={false}>
               Get in touch
             </CTAButton>
           </div>
@@ -79,7 +89,10 @@ export function HomeSection({ homeData }: HomeSectionProps) {
                     ? getCmsImageUrl(homeData.profile_image.url)
                     : "/logo.svg"
                 }
-                alt="Natdanai Khemthong - Full-Stack Developer profile photo"
+                alt={
+                  homeData.profile_image?.alternativeText ||
+                  `${SITE.name} - ${SITE.role} profile photo`
+                }
                 width={400}
                 height={400}
                 sizes="(max-width: 768px) 256px, 320px"
@@ -109,31 +122,26 @@ export function HomeSection({ homeData }: HomeSectionProps) {
         </div>
       </div>
 
-      <div className="mt-8 flex w-full max-w-4xl flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-center sm:flex-row sm:text-left">
-        <span className="text-text-faint text-xs font-medium">
-          Previously building with teams at
-        </span>
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <a
-            href="#experience"
-            className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
-          >
-            MTEL Thailand
-          </a>
-          <a
-            href="#experience"
-            className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
-          >
-            Brilliant & Million
-          </a>
-          <a
-            href="#experience"
-            className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
-          >
-            Ai9 Co., Ltd
-          </a>
+      {exCompany.length > 0 && (
+        <div className="mt-8 flex w-full max-w-4xl flex-col items-center justify-between gap-3 border-t border-white/[0.06] pt-6 text-center sm:flex-row sm:text-left">
+          <span className="text-text-faint text-xs font-medium">
+            Previously building with teams at
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {exCompany.map((company: ExCompany) => {
+              return (
+                <a
+                  key={"company-" + company.exp_id}
+                  href="#experience"
+                  className="bg-bg-elevated/70 text-text-muted hover:bg-bg-elevated hover:text-text inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3.5 py-1 text-xs font-medium transition-all hover:border-white/20 active:scale-[0.98]"
+                >
+                  {company.name}
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

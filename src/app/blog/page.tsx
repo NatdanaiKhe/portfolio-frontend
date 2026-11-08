@@ -4,12 +4,9 @@ import { getBlogPosts, getBlogCategories } from "@/lib/strapi";
 import { SITE } from "@/site.config";
 import { BlogListSection } from "@/components/organisms/blog-list-section";
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
   title: `Blog — ${SITE.name}`,
-  description:
-    "Thoughts on building things, code, and the craft of software.",
+  description: "Thoughts on building things, code, and the craft of software.",
   openGraph: {
     title: `Blog — ${SITE.name}`,
     description:

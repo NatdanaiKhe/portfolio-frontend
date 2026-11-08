@@ -4,7 +4,7 @@ import { SITE } from "@/site.config";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: `${SITE.name} — Portfolio`,
-    short_name: "N. Khemthong",
+    short_name: SITE.shortName,
     description: SITE.description,
     start_url: "/",
     display: "standalone",

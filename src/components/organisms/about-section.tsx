@@ -99,7 +99,7 @@ export function AboutSection({ about, techStacks }: AboutSectionProps) {
           <div className="mt-16 sm:mt-20">
             <div className="mb-6">
               <h3 className="text-text text-xl font-bold tracking-tight sm:text-2xl">
-                Core Technologies
+                Tech Stack
               </h3>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">

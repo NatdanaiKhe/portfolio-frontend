@@ -26,15 +26,19 @@ export function TechStackChip({
         ease: [0.16, 1, 0.3, 1],
       }}
     >
-      <div className="relative h-10 w-10">
-        <Image
-          src={getCmsImageUrl(tech.tech_image.url)}
-          alt={tech.name}
-          width={40}
-          height={40}
-          className="object-contain transition-transform duration-500 group-hover:scale-110"
-          referrerPolicy="no-referrer"
-        />
+      <div className="relative flex h-10 w-10 items-center justify-center">
+        {tech.tech_image?.url ? (
+          <Image
+            src={getCmsImageUrl(tech.tech_image.url)}
+            alt={tech.tech_image.alternativeText || tech.name}
+            width={40}
+            height={40}
+            className="object-contain transition-transform duration-500 group-hover:scale-110"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          <div className="h-8 w-8 rounded-lg border border-white/[0.08] bg-white/[0.04]" />
+        )}
       </div>
       <p className="text-xs font-medium text-text">{tech.name}</p>
       <p className="text-[10px] text-text-faint">{tech.proficiency_level}</p>

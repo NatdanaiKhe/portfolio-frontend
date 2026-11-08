@@ -10,6 +10,12 @@ import type {
 } from "@/types";
 import { extractTextFromBlocks } from "@/lib/utils";
 
+export const CMS_REVALIDATE_TIME = parseInt(
+  process.env.NEXT_PUBLIC_CMS_REVALIDATE_TIME ?? "3600",
+);
+
+export const FILE_REVALIDATE_TIME = 3600;
+
 function cmsUrl(): string {
   return (process.env.CMS_URL ?? "http://localhost:1337").replace(/\/+$/, "");
 }
@@ -31,7 +37,7 @@ async function fetchFromCMS<T>(
       Accept: "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    next: { revalidate: 3600 },
+    next: { revalidate: CMS_REVALIDATE_TIME },
     ...options,
   });
 

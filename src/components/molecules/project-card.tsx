@@ -6,6 +6,7 @@ import { Github, ExternalLink } from "lucide-react";
 import type { ProjectType } from "@/types";
 import { InlineSkillTag } from "@/components/atoms/inline-skill-tag";
 import { getCmsImageUrl } from "@/lib/media-url";
+import { sendGAEvent } from "@/lib/gtag";
 
 export interface ProjectCardProps {
   project: ProjectType;
@@ -29,21 +30,35 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-bg-elevated/70 shadow-[inset_0_1px_0_var(--surface-highlight)] transition-all duration-500 hover:border-white/15 hover:bg-bg-elevated hover:shadow-[inset_0_1px_0_var(--surface-highlight),0_12px_32px_-8px_rgba(0,0,0,0.5)]">
         <a
-          href={project.demo || project.repository}
+          href={project.demo || project.repository || "#"}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`View project ${project.name}`}
           className="relative block aspect-[16/9] w-full overflow-hidden bg-bg-subtle"
+          onClick={() => {
+            sendGAEvent("select_content", {
+              content_type: "project_preview",
+              item_id: project.name,
+              item_name: project.name,
+              destination: project.demo || project.repository,
+            });
+          }}
         >
-          <Image
-            src={getCmsImageUrl(project.preview_image.url)}
-            alt={project.name}
-            width={640}
-            height={360}
-            sizes="(max-width: 640px) 360px, (max-width: 1024px) 50vw, 320px"
-            className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-            referrerPolicy="no-referrer"
-          />
+          {project.preview_image?.url ? (
+            <Image
+              src={getCmsImageUrl(project.preview_image.url)}
+              alt={project.preview_image.alternativeText || project.name}
+              width={640}
+              height={360}
+              sizes="(max-width: 640px) 360px, (max-width: 1024px) 50vw, 320px"
+              className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-white/[0.02] text-xs text-text-faint">
+              No preview available
+            </div>
+          )}
         </a>
 
         <div className="flex flex-1 flex-col p-5 sm:p-6">
@@ -74,6 +89,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   rel="noopener noreferrer"
                   aria-label={`View source code for ${project.name}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted transition-colors duration-200 hover:text-text"
+                  onClick={() => {
+                    sendGAEvent("select_content", {
+                      content_type: "project_repository",
+                      item_id: project.name,
+                      item_name: project.name,
+                      destination: project.repository,
+                    });
+                  }}
                 >
                   <Github className="h-3.5 w-3.5" />
                   <span>Source</span>
@@ -86,6 +109,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   rel="noopener noreferrer"
                   aria-label={`View live demo for ${project.name}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline transition-colors duration-200"
+                  onClick={() => {
+                    sendGAEvent("select_content", {
+                      content_type: "project_demo",
+                      item_id: project.name,
+                      item_name: project.name,
+                      destination: project.demo,
+                    });
+                  }}
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
                   <span>Live Demo</span>

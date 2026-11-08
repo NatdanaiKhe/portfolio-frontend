@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  getBlogPostBySlug,
-  getBlogPosts,
-  getRelatedPosts,
-} from "@/lib/strapi";
+import { getBlogPostBySlug, getBlogPosts, getRelatedPosts } from "@/lib/strapi";
 import { getCmsImageUrl } from "@/lib/media-url";
 import { SITE } from "@/site.config";
 import { BlogPostSection } from "@/components/organisms/blog-post-section";
-
-export const revalidate = 3600;
 
 interface PageProps {
   params: Promise<{ slug: string }>;

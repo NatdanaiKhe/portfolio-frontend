@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { ContactType } from "@/types";
 import { getCmsImageUrl } from "@/lib/media-url";
 import { getSocialSvg } from "@/lib/social-utils";
+import { sendGAEvent } from "@/lib/gtag";
 
 export interface SocialLinkProps {
   social: ContactType["socials"][number];
@@ -23,6 +24,13 @@ export function SocialLink({ social }: SocialLinkProps) {
       whileHover={reduce ? undefined : { y: -2, scale: 1.02 }}
       whileTap={reduce ? undefined : { scale: 0.98 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      onClick={() => {
+        sendGAEvent("select_content", {
+          content_type: "social_link",
+          item_id: social.name,
+          destination: social.link,
+        });
+      }}
     >
       {builtInIcon ? (
         builtInIcon

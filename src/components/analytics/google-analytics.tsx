@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import Script from "next/script";
 import { GA_TRACKING_ID, COOKIE_CONSENT_KEY } from "@/lib/gtag";
+import { RouteTracker } from "@/components/analytics/route-tracker";
 
 export function GoogleAnalytics() {
   if (!GA_TRACKING_ID) {
@@ -54,6 +56,9 @@ export function GoogleAnalytics() {
           `,
         }}
       />
+      <Suspense fallback={null}>
+        <RouteTracker />
+      </Suspense>
     </>
   );
 }
