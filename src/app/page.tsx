@@ -4,9 +4,6 @@ import { ErrorSections } from "./error-sections";
 import { SITE } from "@/site.config";
 import type { BlogPost } from "@/types";
 
-// Regenerate every hour
-export const revalidate = 3600;
-
 export default async function Page() {
   try {
     const [data, latestPosts] = await Promise.all([
@@ -16,8 +13,7 @@ export default async function Page() {
         return [] as BlogPost[];
       }),
     ]);
-    const techNames =
-      data.techStack?.map((t) => t.name).filter(Boolean) ?? [];
+    const techNames = data.techStack?.map((t) => t.name).filter(Boolean) ?? [];
     const socialUrls = (data.contact?.socials ?? [])
       .map((s) => s.link)
       .filter((url): url is string => Boolean(url) && /^https?:\/\//.test(url));
