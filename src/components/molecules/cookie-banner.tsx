@@ -12,6 +12,7 @@ import {
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import {
   getStoredConsent,
   setStoredConsent,
@@ -21,6 +22,7 @@ import {
 } from "@/lib/gtag";
 
 export function CookieBanner() {
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [currentConsent, setCurrentConsent] = useState<ConsentStatus | null>(null);
@@ -98,7 +100,7 @@ export function CookieBanner() {
     setIsOpen(false);
   }, [currentConsent]);
 
-  if (!mounted) {
+  if (!mounted || pathname === "/maintenance") {
     return null;
   }
 
